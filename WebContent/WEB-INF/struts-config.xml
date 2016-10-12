@@ -5,11 +5,22 @@
           "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
 
 <struts-config>
+  <form-beans>
+    <form-bean name="AddContactValidationForm" type="org.lip6.struts.actionForm.AddContactValidationForm"/>
+  </form-beans>
 
   <action-mappings>
 	<action path="/ContactCreation" forward="/pages/creationContact.jsp" />
-  </action-mappings>
   
+  <action path="/AddContact" 
+				type="org.lip6.struts.servletAction.AddContactAction"
+				name="AddContactValidationForm" scope="request" 
+				
+				input="/pages/creationContact.jsp">
+			<forward name="success" path="/pages/success.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+	</action>
+	</action-mappings>
 
   <!-- ========== message file =========================== -->
   <message-resources parameter="Resources" />

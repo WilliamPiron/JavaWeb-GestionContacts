@@ -11,5 +11,36 @@
 <html:base />
 </head>
 <body>
+	<html:form action="/AddContact">
+		<html:errors />
+		<table>
+			<tr>
+				<td align="center" colspan="2"><font size="4"><bean:message key="form.info" /></font>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.id" /></td>
+				<td align="left"><html:text property="id" size="30"
+						maxlength="10" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.lastname" /></td>
+				<td align="left"><html:text property="lastName" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.firstname" /></td>
+				<td align="left"><html:text property="firstName" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.email" /></td>
+				<td align="left"><html:text property="email" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td align="right"><html:submit><bean:message key="form.validation" /></html:submit></td>
+			</tr>
+		</table>
+	</html:form>
 </body>
 </html:html>

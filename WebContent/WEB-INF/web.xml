@@ -27,7 +27,14 @@
 	<servlet-name>action</servlet-name>
 	
   <!-- indique que toutes les url .do atterrirons chez l’Action Servlet de Struts -->
-	  <url-pattern>*.do</url-pattern>
-	</servlet-mapping>
+	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
 	
+  <!-- On déclare nos ressources pour la base JDBC -->
+  <resource-ref>
+    <description>JDBC resource to access my DB i.e. dfj_hibernate</description>
+	<res-ref-name>jdbc/gestioncontacts</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+  </resource-ref>
 </web-app>
