@@ -88,14 +88,17 @@ public class AddContactValidationForm extends ActionForm {
 		if (getId() < 1) {
 			errors.add("id", new ActionMessage("creation.id.error.required"));
 		}
-
-		if (getFirstName() == null || getFirstName().length() < 1) {
+		
+		//matches permet de voir si notre string contient des nombres
+		if (getFirstName() == null || getFirstName().length() < 1 || getFirstName().matches(".*\\d.*")) {
 			errors.add("first name", new ActionMessage("creation.firstname.error.required"));
 		}
-		if (getLastName() == null || getLastName().length() < 1) {
+		if (getLastName() == null || getLastName().length() < 1 || getLastName().matches(".*\\d.*")) {
 			errors.add("last name", new ActionMessage("creation.lastname.error.required"));
 		}
-		if (getEmail() == null || getEmail().length() < 1) {
+		
+		//Pour le matches on regarde que l'email est bien de la forme string@string.string et on invalide toutes les autres formes
+		if (getEmail() == null || getEmail().length() < 1 || !getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
 			errors.add("email", new ActionMessage("creation.email.error.required"));
 		}
 		return errors;
