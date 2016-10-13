@@ -32,7 +32,7 @@
 	
   <!-- On déclare nos ressources pour la base JDBC -->
   <resource-ref>
-    <description>JDBC resource to access my DB i.e. dfj_hibernate</description>
+    <description>Ressource JDBC pour acceder à le base</description>
 	<res-ref-name>jdbc/gestioncontacts</res-ref-name>
 	<res-type>javax.sql.DataSource</res-type>
 	<res-auth>Container</res-auth>
