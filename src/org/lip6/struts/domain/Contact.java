@@ -1,23 +1,22 @@
 package org.lip6.struts.domain;
 
 public class Contact {
+	
 	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
+	
+	private Address address;
+	private PhoneNumber phone;
+	private Entreprise enterprise;
+	private ContactGroup group;
 
 	/**
-	 * @return Email
+	 * @return ID Returns ID
 	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @return First Name
-	 */
-	public String getFirstName() {
-		return firstName;
+	public long getId() {
+		return id;
 	}
 
 	/**
@@ -28,11 +27,33 @@ public class Contact {
 	}
 
 	/**
-	 * @param string
-	 *            Sets the Email
+	 * @return First Name
 	 */
-	public void setEmail(String string) {
-		email = string;
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @return Email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param l
+	 *            Sets the ID
+	 */
+	public void setId(long l) {
+		id = l;
+	}
+
+	/**
+	 * @param string
+	 *            sets the Last Name
+	 */
+	public void setLastName(String string) {
+		lastName = string;
 	}
 
 	/**
@@ -45,24 +66,9 @@ public class Contact {
 
 	/**
 	 * @param string
-	 *            sets the Last Name
+	 *            Sets the Email
 	 */
-	public void setLastName(String string) {
-		lastName = string;
-	}
-
-	/**
-	 * @return ID Returns ID
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param l
-	 *            Sets the ID
-	 */
-	public void setId(long l) {
-		id = l;
+	public void setEmail(String string) {
+		email = string;
 	}
 }

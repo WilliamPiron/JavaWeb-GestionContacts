@@ -13,7 +13,7 @@ public class DAOContact {
 
 	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/gestioncontacts";
 
-	public String addContact(final long id, final String firstName, final String lastName, final String email) {
+	public String addContact(final long id, final String firstName, final String lastName, final String email, final String street) {
 
 		System.out.println("Entre dans contact DAO !");
 		try {

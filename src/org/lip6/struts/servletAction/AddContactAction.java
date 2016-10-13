@@ -23,10 +23,11 @@ public class AddContactAction extends Action {
 		final String firstName = lForm.getFirstName().trim().replaceAll(" +", " ");
 		final String lastName = lForm.getLastName().trim().replaceAll(" +", " ");
 		final String email = lForm.getEmail();
+		final String street = lForm.getStreet().trim().replaceAll(" +", " ");
 
 		// create a new Contact
 		final DAOContact lDAOContact = new DAOContact();
-		final String lError = lDAOContact.addContact(id, firstName, lastName, email);
+		final String lError = lDAOContact.addContact(id, firstName, lastName, email, street);
 
 		if (lError == null) {
 			// if no exception is raised, forward "success"

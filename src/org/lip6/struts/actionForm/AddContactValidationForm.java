@@ -11,15 +11,24 @@ public class AddContactValidationForm extends ActionForm {
 	private static final long serialVersionUID = 1L;
 
 	private long id = 0;
-	private String firstName = null;
 	private String lastName = null;
+	private String firstName = null;
 	private String email = null;
+	private String street = null;
+	private String city = null;
+	
+	/**
+	 * @return ID Returns ID
+	 */
+	public long getId() {
+		return id;
+	}
 
 	/**
-	 * @return Email
+	 * @return Last name
 	 */
-	public String getEmail() {
-		return email;
+	public String getLastName() {
+		return lastName;
 	}
 
 	/**
@@ -28,12 +37,50 @@ public class AddContactValidationForm extends ActionForm {
 	public String getFirstName() {
 		return firstName;
 	}
-
+	
 	/**
-	 * @return Last name
+	 * @return Email
 	 */
-	public String getLastName() {
-		return lastName;
+	public String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * @return Street
+	 */
+	public String getStreet() {
+		return street;
+	}
+	
+	/**
+	 * @return City
+	 */
+	public String getCity() {
+		return city;
+	}
+	
+	/**
+	 * @param l
+	 *            Sets the ID
+	 */
+	public void setId(long l) {
+		id = l;
+	}
+	
+	/**
+	 * @param string
+	 *            sets the Last Name
+	 */
+	public void setLastName(String string) {
+		lastName = string;
+	}
+	
+	/**
+	 * @param string
+	 *            Sets the First Name
+	 */
+	public void setFirstName(String string) {
+		firstName = string;
 	}
 
 	/**
@@ -46,33 +93,18 @@ public class AddContactValidationForm extends ActionForm {
 
 	/**
 	 * @param string
-	 *            Sets the First Name
+	 *            sets the Street
 	 */
-	public void setFirstName(String string) {
-		firstName = string;
+	public void setStreet(String string) {
+		street = string;
 	}
-
+	
 	/**
 	 * @param string
-	 *            sets the Last Name
+	 *            sets the City
 	 */
-	public void setLastName(String string) {
-		lastName = string;
-	}
-
-	/**
-	 * @return ID Returns ID
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param l
-	 *            Sets the ID
-	 */
-	public void setId(long l) {
-		id = l;
+	public void setCity(String string) {
+		city = string;
 	}
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
@@ -80,6 +112,8 @@ public class AddContactValidationForm extends ActionForm {
 		this.firstName = null;
 		this.lastName = null;
 		this.email = null;
+		this.street = null;
+		this.city = null;
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
@@ -100,6 +134,12 @@ public class AddContactValidationForm extends ActionForm {
 		//Pour le matches on regarde que l'email est bien de la forme string@string.string et on invalide toutes les autres formes
 		if (getEmail() == null || getEmail().length() < 1 || !getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
 			errors.add("email", new ActionMessage("creation.email.error.required"));
+		}
+		if (getStreet() == null || getStreet().length() < 1) {
+			errors.add("street", new ActionMessage("creation.street.error.required"));
+		}
+		if (getCity() == null || getStreet().length() < 1) {
+			errors.add("street", new ActionMessage("creation.city.error.required"));
 		}
 		return errors;
 	}
