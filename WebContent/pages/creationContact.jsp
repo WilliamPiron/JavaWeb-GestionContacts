@@ -20,7 +20,7 @@
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.id" /></td>
 				<td align="left"><html:text property="id" size="30"
-						maxlength="10" /></td>
+						maxlength="9" /></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.lastname" /></td>

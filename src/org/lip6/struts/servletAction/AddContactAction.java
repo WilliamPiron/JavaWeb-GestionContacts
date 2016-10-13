@@ -19,8 +19,9 @@ public class AddContactAction extends Action {
 
 		final long id = lForm.getId();
 
-		final String firstName = lForm.getFirstName();
-		final String lastName = lForm.getLastName();
+		//La fonction trim permet de supprimer les espaces en début et en fin de chaîne
+		final String firstName = lForm.getFirstName().trim().replaceAll(" +", " ");
+		final String lastName = lForm.getLastName().trim().replaceAll(" +", " ");
 		final String email = lForm.getEmail();
 
 		// create a new Contact

@@ -18,7 +18,7 @@ public class DAOContact {
 	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/gestioncontacts";
 
 	public String addContact(final long id, final String firstName, final String lastName, final String email) {
-		
+
 		System.out.println("Entre dans contact DAO !");
 		try {
 			final Context lContext = new InitialContext();
@@ -28,8 +28,8 @@ public class DAOContact {
 			// adding a new contact
 			final PreparedStatement lPreparedStatementCreation =
 
-					lConnection.prepareStatement(
-							"INSERT INTO CONTACT(ID, LASTNAME, FIRSTNAME, EMAIL) VALUES(?, ?, ?, ?)");
+					lConnection
+							.prepareStatement("INSERT INTO CONTACT(ID, LASTNAME, FIRSTNAME, EMAIL) VALUES(?, ?, ?, ?)");
 
 			lPreparedStatementCreation.setLong(1, id);
 			lPreparedStatementCreation.setString(2, lastName);
