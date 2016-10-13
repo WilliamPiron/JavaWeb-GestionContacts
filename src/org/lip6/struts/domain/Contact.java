@@ -8,9 +8,9 @@ public class Contact {
 	private String email;
 	
 	private Address address;
-	private PhoneNumber phone;
+	private PhoneNumber phone; // Liste
 	private Entreprise enterprise;
-	private ContactGroup group;
+	private ContactGroup group; // Liste
 
 	/**
 	 * @return ID Returns ID
