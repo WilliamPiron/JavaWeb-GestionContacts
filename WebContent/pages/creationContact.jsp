@@ -43,6 +43,11 @@
 				<td><bean:message key="add.contact.title.address" /></td>
 			</tr>
 			<tr>
+				<td align="right"><bean:message key="add.contact.form.address.id" /></td>
+				<td align="left"><html:text property="idAddress" size="30"
+						maxlength="9" /></td>
+			</tr>
+			<tr>
 				<td align="right"><bean:message key="add.contact.form.street" /></td>
 				<td align="left"><html:text property="street" size="30"
 						maxlength="50" /></td>
@@ -50,6 +55,55 @@
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.city" /></td>
 				<td align="left"><html:text property="city" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.zip" /></td>
+				<td align="left"><html:text property="zip" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.country" /></td>
+				<td align="left"><html:text property="country" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td><bean:message key="add.contact.title.phone" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.phone.id" /></td>
+				<td align="left"><html:text property="idPhone" size="30"
+						maxlength="9" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.phonekind" /></td>
+				<td align="left"><html:text property="phoneKind" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.phonenumber" /></td>
+				<td align="left"><html:text property="phoneNumber" size="30"
+						maxlength="50" /></td>
+			</tr>
+			<tr>
+				<td><bean:message key="add.contact.title.company" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.company.numsiret" /></td>
+				<td align="left"><html:text property="numSiret" size="30"
+						maxlength="9" /></td>
+			</tr>
+			<tr>
+				<td><bean:message key="add.contact.title.group" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.group.id" /></td>
+				<td align="left"><html:text property="idGroup" size="30"
+						maxlength="9" /></td>
+			</tr>
+			<tr>
+				<td align="right"><bean:message key="add.contact.form.groupname" /></td>
+				<td align="left"><html:text property="groupName" size="30"
 						maxlength="50" /></td>
 			</tr>
 			<tr>
