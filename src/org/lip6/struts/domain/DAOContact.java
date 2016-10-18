@@ -15,10 +15,11 @@ public class DAOContact {
 
 	public String addContact(final long id, final String firstName, final String lastName, final String email,
 			final long idAddress, final String street, final String city, final String zip, final String country,
-			final long idPhone, final String phoneKind, final String phoneNumber, final long numSiret,
-			final long idGroup, final String groupName) {
+			final long idPhone, final String phoneKind, final String phoneNumber, final long idGroup,
+			final String groupName) {
 
-		System.out.println("Entre dans contact DAO !");
+		System.out.println("Entre dans contact DAO");
+
 		try {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
@@ -37,35 +38,35 @@ public class DAOContact {
 			lPreparedStatementCreation.executeUpdate();
 
 			// Address
-			PreparedStatement lPreparedStatementAddressCreation =
 
-					lConnection.prepareStatement(
-							"INSERT INTO ADDRESS(ID, STREET, CITY, ZIP, COUNTRY) VALUES(?, ?, ?, ?, ?)");
+			// Si l'un des attributs est non vide cela veut dire que les autres
+			// non plus, c'est pourquoi on ne vérifie que la rue
+			if (!street.isEmpty()) {
+				PreparedStatement lPreparedStatementAddressCreation =
 
-			lPreparedStatementAddressCreation.setLong(1, idAddress);
-			lPreparedStatementAddressCreation.setString(2, street);
-			lPreparedStatementAddressCreation.setString(3, city);
-			lPreparedStatementAddressCreation.setString(4, zip);
-			lPreparedStatementAddressCreation.setString(5, country);
-			lPreparedStatementAddressCreation.executeUpdate();
+						lConnection.prepareStatement(
+								"INSERT INTO ADDRESS(ID, STREET, CITY, ZIP, COUNTRY) VALUES(?, ?, ?, ?, ?)");
+
+				lPreparedStatementAddressCreation.setLong(1, idAddress);
+				lPreparedStatementAddressCreation.setString(2, street);
+				lPreparedStatementAddressCreation.setString(3, city);
+				lPreparedStatementAddressCreation.setString(4, zip);
+				lPreparedStatementAddressCreation.setString(5, country);
+				lPreparedStatementAddressCreation.executeUpdate();
+			}
 
 			// Phone
-			PreparedStatement lPreparedStatementPhoneCreation =
+			if (!phoneKind.isEmpty()) {
+				PreparedStatement lPreparedStatementPhoneCreation =
 
-					lConnection.prepareStatement("INSERT INTO PHONENUMBER(ID, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
+						lConnection.prepareStatement(
+								"INSERT INTO PHONENUMBER(ID, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
 
-			lPreparedStatementPhoneCreation.setLong(1, idPhone);
-			lPreparedStatementPhoneCreation.setString(2, phoneKind);
-			lPreparedStatementPhoneCreation.setString(3, phoneNumber);
-			lPreparedStatementPhoneCreation.executeUpdate();
-
-			// Company
-			PreparedStatement lPreparedStatementCompanyCreation =
-
-					lConnection.prepareStatement("INSERT INTO ENTREPRISE(NUMSIRET) VALUES(?)");
-
-			lPreparedStatementCompanyCreation.setLong(1, numSiret);
-			lPreparedStatementCompanyCreation.executeUpdate();
+				lPreparedStatementPhoneCreation.setLong(1, idPhone);
+				lPreparedStatementPhoneCreation.setString(2, phoneKind);
+				lPreparedStatementPhoneCreation.setString(3, phoneNumber);
+				lPreparedStatementPhoneCreation.executeUpdate();
+			}
 
 			// Group
 			PreparedStatement lPreparedStatementGroupCreation =
