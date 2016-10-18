@@ -22,12 +22,12 @@
 			<tr>
 				<td align="right"><bean:message key="contact.form.username" /></td>
 				<td align="left"><html:text property="username" size="30"
-						maxlength="50" /></td>
+						maxlength="50" value="admin" /></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message key="contact.form.password" /></td>
 				<td align="left"><html:password property="password" size="30"
-						maxlength="50" /></td>
+						maxlength="50" value="admin"/></td>
 			</tr>
 			<tr>
 				<td align="right"><html:submit>
