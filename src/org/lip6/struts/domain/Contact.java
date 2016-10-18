@@ -1,12 +1,12 @@
 package org.lip6.struts.domain;
 
 public class Contact {
-	
+
 	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
-	
+
 	private Address address;
 	private PhoneNumber phone; // Liste
 	private Entreprise enterprise;

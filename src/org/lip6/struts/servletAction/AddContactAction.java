@@ -39,11 +39,11 @@ public class AddContactAction extends Action {
 		final long idPhone = lForm.getIdPhone();
 		final String phoneKind = lForm.getPhoneKind().trim().replaceAll(" +", " ");
 		final String phoneNumber = lForm.getPhoneNumber().trim().replaceAll(" +", " ");
-		
-		//Company
+
+		// Company
 		final long numSiret = lForm.getNumSiret();
-		
-		//Group
+
+		// Group
 		final long idGroup = lForm.getIdGroup();
 		final String groupName = lForm.getGroupName().trim().replaceAll(" +", " ");
 

@@ -58,16 +58,16 @@ public class DAOContact {
 			lPreparedStatementPhoneCreation.setString(2, phoneKind);
 			lPreparedStatementPhoneCreation.setString(3, phoneNumber);
 			lPreparedStatementPhoneCreation.executeUpdate();
-			
-			//Company
+
+			// Company
 			PreparedStatement lPreparedStatementCompanyCreation =
 
 					lConnection.prepareStatement("INSERT INTO ENTREPRISE(NUMSIRET) VALUES(?)");
 
 			lPreparedStatementCompanyCreation.setLong(1, numSiret);
 			lPreparedStatementCompanyCreation.executeUpdate();
-			
-			//Group
+
+			// Group
 			PreparedStatement lPreparedStatementGroupCreation =
 
 					lConnection.prepareStatement("INSERT INTO CONTACTGROUP(GROUPID, GROUPNAME) VALUES(?, ?)");
@@ -75,7 +75,7 @@ public class DAOContact {
 			lPreparedStatementGroupCreation.setLong(1, idGroup);
 			lPreparedStatementGroupCreation.setString(2, groupName);
 			lPreparedStatementGroupCreation.executeUpdate();
-			
+
 			return null;
 		} catch (NamingException e) {
 

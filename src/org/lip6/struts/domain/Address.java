@@ -7,42 +7,42 @@ public class Address {
 	private String city;
 	private String zip;
 	private String country;
-	
+
 	/**
 	 * @return ID Returns ID
 	 */
 	public long getId() {
 		return id;
 	}
-	
+
 	/**
 	 * @return Street
 	 */
 	public String getStreet() {
 		return street;
 	}
-	
+
 	/**
 	 * @return City
 	 */
 	public String getCity() {
 		return city;
 	}
-	
+
 	/**
 	 * @return Zip
 	 */
 	public String getZip() {
 		return zip;
 	}
-	
+
 	/**
 	 * @return Country
 	 */
 	public String getCountry() {
 		return country;
 	}
-	
+
 	/**
 	 * @param l
 	 *            Sets the ID
@@ -50,7 +50,7 @@ public class Address {
 	public void setId(long l) {
 		id = l;
 	}
-	
+
 	/**
 	 * @param string
 	 *            sets the Street
@@ -58,7 +58,7 @@ public class Address {
 	public void setStreet(String string) {
 		street = string;
 	}
-	
+
 	/**
 	 * @param string
 	 *            sets the Zip
@@ -66,7 +66,7 @@ public class Address {
 	public void setZip(String string) {
 		zip = string;
 	}
-	
+
 	/**
 	 * @param string
 	 *            sets the Country

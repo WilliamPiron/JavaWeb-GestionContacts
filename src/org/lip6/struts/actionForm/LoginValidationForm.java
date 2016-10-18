@@ -48,17 +48,17 @@ public class LoginValidationForm extends ActionForm {
 		this.username = null;
 		this.password = null;
 	}
-	
+
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
-		
+
 		if (getUsername() == null || getUsername().length() < 1) {
 			errors.add("username", new ActionMessage("username.error.required"));
 		}
 		if (getPassword() == null || getPassword().length() < 1) {
 			errors.add("password", new ActionMessage("password.error.required"));
 		}
-		if(!getPassword().equals(getUsername())) {
+		if (!getPassword().equals(getUsername())) {
 			errors.add("different", new ActionMessage("login.error.required"));
 		}
 		return errors;
