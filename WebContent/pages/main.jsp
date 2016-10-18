@@ -19,5 +19,9 @@
 		<a href="ContactCreation.do"><bean:message
 				key="main.addcontact.link" /></a>
 	</h4>
+	<h4>
+		<a href="ContactDeletion.do"><bean:message
+				key="main.deletecontact.link" /></a>
+	</h4>
 </body>
 </html:html>
