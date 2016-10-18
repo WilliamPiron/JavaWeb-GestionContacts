@@ -7,20 +7,31 @@
 <struts-config>
   <form-beans>
     <form-bean name="AddContactValidationForm" type="org.lip6.struts.actionForm.AddContactValidationForm"/>
+    <form-bean name="LoginValidationForm" type="org.lip6.struts.actionForm.LoginValidationForm"/>
   </form-beans>
 
   <action-mappings>
 	<action path="/ContactCreation" forward="/pages/creationContact.jsp" />
+	<action path="/Connexion" forward="/pages/index.jsp" />
   
-  <action path="/AddContact" 
+    <action path="/AddContact" 
 				type="org.lip6.struts.servletAction.AddContactAction"
 				name="AddContactValidationForm" scope="request" 
-				
 				input="/pages/creationContact.jsp">
 			<forward name="success" path="/pages/success.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
-	</action>
-	</action-mappings>
+    </action>
+    
+    <action path="/Login" 
+				type="org.lip6.struts.servletAction.LoginAction"
+				name="LoginValidationForm" scope="request" 
+				input="/pages/index.jsp">
+			<forward name="connexion" path="/pages/main.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+	
+	
+  </action-mappings>
 
   <!-- ========== message file =========================== -->
   <message-resources parameter="Resources" />
