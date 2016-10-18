@@ -38,14 +38,10 @@ public class AddContactAction extends Action {
 		final String phoneKind = lForm.getPhoneKind().trim().replaceAll(" +", " ");
 		final String phoneNumber = lForm.getPhoneNumber().trim().replaceAll(" +", " ");
 
-		// Group
-		final long idGroup = lForm.getIdGroup();
-		final String groupName = lForm.getGroupName().trim().replaceAll(" +", " ");
-
 		// create a new Contact
 		final DAOContact lDAOContact = new DAOContact();
 		final String lError = lDAOContact.addContact(id, firstName, lastName, email, id, street, city, zip, country, id,
-				phoneKind, phoneNumber, idGroup, groupName);
+				phoneKind, phoneNumber);
 
 		if (lError == null) {
 			// if no exception is raised, forward "success"

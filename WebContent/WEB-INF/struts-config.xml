@@ -8,11 +8,14 @@
   <form-beans>
     <form-bean name="AddContactValidationForm" type="org.lip6.struts.actionForm.AddContactValidationForm"/>
     <form-bean name="LoginValidationForm" type="org.lip6.struts.actionForm.LoginValidationForm"/>
+    <form-bean name="AddGroupValidationForm" type="org.lip6.struts.actionForm.AddGroupValidationForm"/>
   </form-beans>
 
   <action-mappings>
+    <action path="/Main" forward="/pages/main.jsp" />
 	<action path="/ContactCreation" forward="/pages/creationContact.jsp" />
 	<action path="/Connexion" forward="/pages/index.jsp" />
+	<action path="/GroupCreation" forward="/pages/creationGroup.jsp" />
   
     <action path="/AddContact" 
 				type="org.lip6.struts.servletAction.AddContactAction"
@@ -22,11 +25,19 @@
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
-    <action path="/Login" 
+    <action path="/Login"
 				type="org.lip6.struts.servletAction.LoginAction"
 				name="LoginValidationForm" scope="request" 
 				input="/pages/index.jsp">
 			<forward name="connexion" path="/pages/main.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/AddGroup"
+				type="org.lip6.struts.servletAction.AddGroupAction"
+				name="AddGroupValidationForm" scope="request" 
+				input="/pages/creationGroup.jsp">
+			<forward name="success" path="/pages/success.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
 	

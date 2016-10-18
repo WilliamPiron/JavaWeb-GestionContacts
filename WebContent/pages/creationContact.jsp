@@ -79,20 +79,6 @@
 						maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td><bean:message key="add.contact.title.group" /></td>
-			</tr>
-			<tr>
-				<td align="right"><bean:message key="add.contact.form.group.id" /></td>
-				<td align="left"><html:text property="idGroup" size="30"
-						maxlength="9" /></td>
-			</tr>
-			<tr>
-				<td align="right"><bean:message
-						key="add.contact.form.groupname" /></td>
-				<td align="left"><html:text property="groupName" size="30"
-						maxlength="50" /></td>
-			</tr>
-			<tr>
 				<td align="right"><html:submit>
 						<bean:message key="form.validation" />
 					</html:submit></td>

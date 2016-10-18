@@ -8,5 +8,10 @@
 </head>
 <body>
 	<bean:message key="contact.add.success" />
+	
+	<h4>
+		<a href="Main.do"><bean:message
+				key="main.redirection" /></a>
+	</h4>
 </body>
 </html:html>

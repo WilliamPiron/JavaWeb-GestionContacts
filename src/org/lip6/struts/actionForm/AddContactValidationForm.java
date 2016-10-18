@@ -26,10 +26,6 @@ public class AddContactValidationForm extends ActionForm {
 	private String phoneKind = null;
 	private String phoneNumber = null;
 
-	// Group
-	private long idGroup = 0;
-	private String groupName = null;
-
 	/**
 	 * @return ID Returns ID
 	 */
@@ -98,20 +94,6 @@ public class AddContactValidationForm extends ActionForm {
 	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
-	}
-
-	/**
-	 * @return ID Returns ID
-	 */
-	public long getIdGroup() {
-		return idGroup;
-	}
-
-	/**
-	 * @return Group Name
-	 */
-	public String getGroupName() {
-		return groupName;
 	}
 
 	/**
@@ -194,22 +176,6 @@ public class AddContactValidationForm extends ActionForm {
 		phoneNumber = string;
 	}
 
-	/**
-	 * @param l
-	 *            Sets the ID for group
-	 */
-	public void setIdGroup(long l) {
-		idGroup = l;
-	}
-
-	/**
-	 * @param string
-	 *            sets the Group name
-	 */
-	public void setGroupName(String string) {
-		groupName = string;
-	}
-
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 
 		// Contact
@@ -227,10 +193,6 @@ public class AddContactValidationForm extends ActionForm {
 		// Phone
 		this.phoneKind = null;
 		this.phoneNumber = null;
-
-		// Group
-		this.idGroup = 0;
-		this.groupName = null;
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
@@ -282,14 +244,6 @@ public class AddContactValidationForm extends ActionForm {
 			if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 1) {
 				errors.add("phoneNumber", new ActionMessage("creation.phonenumber.error.required"));
 			}
-		}
-
-		// Group
-		if (getIdGroup() < 1) {
-			errors.add("idGroup", new ActionMessage("creation.id.group.error.required"));
-		}
-		if (getGroupName().trim() == null || getGroupName().trim().length() < 1) {
-			errors.add("groupName", new ActionMessage("creation.groupname.error.required"));
 		}
 
 		return errors;

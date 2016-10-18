@@ -1,5 +1,7 @@
 package org.lip6.struts.domain;
 
+import java.util.List;
+
 public class Contact {
 
 	private long id;
@@ -8,9 +10,9 @@ public class Contact {
 	private String email;
 
 	private Address address;
-	private PhoneNumber phone; // Liste
+	private List<PhoneNumber> phone; // Liste
 	private Entreprise enterprise;
-	private ContactGroup group; // Liste
+	private List<ContactGroup> group; // Liste
 
 	/**
 	 * @return ID Returns ID

@@ -2,6 +2,7 @@ package org.lip6.struts.domain;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -15,8 +16,7 @@ public class DAOContact {
 
 	public String addContact(final long id, final String firstName, final String lastName, final String email,
 			final long idAddress, final String street, final String city, final String zip, final String country,
-			final long idPhone, final String phoneKind, final String phoneNumber, final long idGroup,
-			final String groupName) {
+			final long idPhone, final String phoneKind, final String phoneNumber) {
 
 		System.out.println("Entre dans contact DAO");
 
@@ -67,16 +67,39 @@ public class DAOContact {
 				lPreparedStatementPhoneCreation.setString(3, phoneNumber);
 				lPreparedStatementPhoneCreation.executeUpdate();
 			}
+			
+			return null;
+		} catch (NamingException e) {
 
-			// Group
-			PreparedStatement lPreparedStatementGroupCreation =
+			return "NamingException : " + e.getMessage();
 
-					lConnection.prepareStatement("INSERT INTO CONTACTGROUP(GROUPID, GROUPNAME) VALUES(?, ?)");
+		} catch (SQLException e) {
 
-			lPreparedStatementGroupCreation.setLong(1, idGroup);
-			lPreparedStatementGroupCreation.setString(2, groupName);
-			lPreparedStatementGroupCreation.executeUpdate();
+			return "SQLException : " + e.getMessage();
 
+		}
+	}
+	
+	public String afficherContacts() {
+
+		System.out.println("Entre dans contact DAO");
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			final Connection lConnection = lDataSource.getConnection();
+
+			final PreparedStatement lPreparedStatementCreation =
+
+					lConnection
+							.prepareStatement("SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact");
+			
+			ResultSet rs = lPreparedStatementCreation.executeQuery();
+			
+			while(rs.next()) {
+				System.out.println(rs.getLong("ID") + " " + rs.getString("LASTNAME") + " " + rs.getString("FIRSTNAME") + " " + rs.getString("EMAIL"));
+			}
+			
 			return null;
 		} catch (NamingException e) {
 

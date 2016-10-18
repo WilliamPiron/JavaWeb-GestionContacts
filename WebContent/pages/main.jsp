@@ -20,8 +20,8 @@
 				key="main.addcontact.link" /></a>
 	</h4>
 	<h4>
-		<a href="ContactDeletion.do"><bean:message
-				key="main.deletecontact.link" /></a>
+		<a href="GroupCreation.do"><bean:message
+				key="main.addgroup.link" /></a>
 	</h4>
 </body>
 </html:html>
