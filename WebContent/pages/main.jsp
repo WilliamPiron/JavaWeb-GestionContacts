@@ -23,5 +23,9 @@
 		<a href="GroupCreation.do"><bean:message
 				key="main.addgroup.link" /></a>
 	</h4>
+	<h4>
+		<a href="ContactDisplay.do"><bean:message
+				key="main.contactdisplay.link" /></a>
+	</h4>
 </body>
 </html:html>

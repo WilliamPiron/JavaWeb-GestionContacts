@@ -16,6 +16,7 @@
 	<action path="/ContactCreation" forward="/pages/creationContact.jsp" />
 	<action path="/Connexion" forward="/pages/index.jsp" />
 	<action path="/GroupCreation" forward="/pages/creationGroup.jsp" />
+	<action path="/ContactDisplay" forward="/pages/displayContact.jsp" />
   
     <action path="/AddContact" 
 				type="org.lip6.struts.servletAction.AddContactAction"

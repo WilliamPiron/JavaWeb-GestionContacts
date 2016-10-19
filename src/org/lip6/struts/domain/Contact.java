@@ -1,8 +1,11 @@
 package org.lip6.struts.domain;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Contact {
+	
+	private String error;
 
 	private long id;
 	private String firstName;
@@ -10,9 +13,25 @@ public class Contact {
 	private String email;
 
 	private Address address;
-	private List<PhoneNumber> phone; // Liste
-	private Entreprise enterprise;
-	private List<ContactGroup> group; // Liste
+	private List<PhoneNumber> phone = new LinkedList<PhoneNumber>();
+	private List<ContactGroup> group = new LinkedList<ContactGroup>();
+	
+	public Contact(long id, String firstName, String lastName, String email, Address address, List<PhoneNumber> phone, List<ContactGroup> group) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.group = group;
+	}
+	
+	/**
+	 * @return Error
+	 */
+	public String getError() {
+		return error;
+	}
 
 	/**
 	 * @return ID Returns ID
@@ -40,6 +59,35 @@ public class Contact {
 	 */
 	public String getEmail() {
 		return email;
+	}
+	
+	/**
+	 * @return Address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+	
+	/**
+	 * @return Phone list
+	 */
+	public List<PhoneNumber> getPhone() {
+		return phone;
+	}
+	
+	/**
+	 * @return Group list
+	 */
+	public List<ContactGroup> getGroup() {
+		return group;
+	}
+	
+	/**
+	 * @param string
+	 *            sets the Last Name
+	 */
+	public void setError(String string) {
+		error = string;
 	}
 
 	/**
@@ -72,5 +120,29 @@ public class Contact {
 	 */
 	public void setEmail(String string) {
 		email = string;
+	}
+	
+	/**
+	 * @param string
+	 *            Sets the Address
+	 */
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
+	/**
+	 * @param string
+	 *            Sets the Phones
+	 */
+	public void setPhone(LinkedList<PhoneNumber> phone) {
+		this.phone = phone;
+	}
+	
+	/**
+	 * @param string
+	 *            Sets the Phones
+	 */
+	public void setGroup(LinkedList<ContactGroup> group) {
+		this.group = group;
 	}
 }

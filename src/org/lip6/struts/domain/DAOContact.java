@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -18,7 +20,7 @@ public class DAOContact {
 			final long idAddress, final String street, final String city, final String zip, final String country,
 			final long idPhone, final String phoneKind, final String phoneNumber) {
 
-		System.out.println("Entre dans contact DAO");
+		System.out.println("Entre dans creation contact DAO");
 
 		try {
 			final Context lContext = new InitialContext();
@@ -80,9 +82,10 @@ public class DAOContact {
 		}
 	}
 	
-	public String afficherContacts() {
+	public List<Contact> displayContacts() {
 
-		System.out.println("Entre dans contact DAO");
+		System.out.println("Entre dans affichage contact DAO");
+		final List<Contact> lListeContact = new LinkedList<Contact>();
 
 		try {
 			final Context lContext = new InitialContext();
@@ -97,18 +100,29 @@ public class DAOContact {
 			ResultSet rs = lPreparedStatementCreation.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(rs.getLong("ID") + " " + rs.getString("LASTNAME") + " " + rs.getString("FIRSTNAME") + " " + rs.getString("EMAIL"));
+				final Long id = rs.getLong("ID");
+				final String lastName = rs.getString("LASTNAME");
+				final String firstName = rs.getString("FIRSTNAME");
+				final String email = rs.getString("EMAIL");
+				
+				System.out.println(id + " " + lastName + " " + firstName + " " + email);
+				
+				final Contact contact = new Contact(id, lastName, firstName, email, null, null, null);
+				lListeContact.add(contact);
 			}
 			
 			return null;
 		} catch (NamingException e) {
 
-			return "NamingException : " + e.getMessage();
+			System.out.println(e.getMessage());
+			//return "NamingException : " + e.getMessage();
 
 		} catch (SQLException e) {
 
-			return "SQLException : " + e.getMessage();
+			System.out.println(e.getMessage());
+			//return "SQLException : " + e.getMessage();
 
 		}
+		return lListeContact;
 	}
 }
