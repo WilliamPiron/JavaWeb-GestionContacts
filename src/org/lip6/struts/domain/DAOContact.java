@@ -82,15 +82,18 @@ public class DAOContact {
 		}
 	}
 	
-	public List<Contact> displayContacts() {
+	public DisplayContact displayContacts() {
 
 		System.out.println("Entre dans affichage contact DAO");
-		final List<Contact> lListeContact = new LinkedList<Contact>();
+		
+		final DisplayContact display = new DisplayContact();
 
 		try {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			final Connection lConnection = lDataSource.getConnection();
+			
+			final List<Contact> contacts = new LinkedList<Contact>();
 
 			final PreparedStatement lPreparedStatementCreation =
 
@@ -107,22 +110,22 @@ public class DAOContact {
 				
 				System.out.println(id + " " + lastName + " " + firstName + " " + email);
 				
-				final Contact contact = new Contact(id, lastName, firstName, email, null, null, null);
-				lListeContact.add(contact);
+				contacts.add(new Contact(id, lastName, firstName, email, null, null, null));
 			}
 			
-			return null;
+			display.setContacts(contacts);
+			
 		} catch (NamingException e) {
 
 			System.out.println(e.getMessage());
-			//return "NamingException : " + e.getMessage();
+			display.setError("NamingException : " + e.getMessage());
 
 		} catch (SQLException e) {
 
 			System.out.println(e.getMessage());
-			//return "SQLException : " + e.getMessage();
+			display.setError("SQLException : " + e.getMessage());
 
 		}
-		return lListeContact;
+		return display;
 	}
 }
