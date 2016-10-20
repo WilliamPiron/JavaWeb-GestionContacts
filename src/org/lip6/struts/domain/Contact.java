@@ -8,12 +8,13 @@ import java.util.List;
 public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 58409687792501803L;
+	
+	private String error;
 
 	private long id;
 	private String firstName;
 	private String lastName;
 	private String email;
-
 	private Address address;
 	private List<PhoneNumber> phone;
 	private List<ContactGroup> group;
@@ -28,6 +29,8 @@ public class Contact implements Serializable {
 		this.phone = phone;
 		this.group = group;
 	}
+	
+	public Contact() {}
 
 	/**
 	 * @return ID Returns ID
@@ -76,6 +79,13 @@ public class Contact implements Serializable {
 	 */
 	public List<ContactGroup> getGroup() {
 		return group;
+	}
+	
+	/**
+	 * @return Error
+	 */
+	public String getError() {
+		return error;
 	}
 
 	/**
@@ -132,5 +142,13 @@ public class Contact implements Serializable {
 	 */
 	public void setGroup(LinkedList<ContactGroup> group) {
 		this.group = group;
+	}
+	
+	/**
+	 * @param string
+	 *            Sets errors
+	 */
+	public void setError(String string) {
+		error = string;
 	}
 }

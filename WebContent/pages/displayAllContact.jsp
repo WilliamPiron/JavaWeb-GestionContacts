@@ -17,15 +17,30 @@
 				<th><bean:message key="add.contact.form.lastname" /></th>
 				<th><bean:message key="add.contact.form.firstname" /></th>
 				<th><bean:message key="add.contact.form.email" /></th>
+				<th><bean:message key="contact.all.display" /></th>
+				<th><bean:message key="contact.all.delete" /></th>
+				<th><bean:message key="contact.all.update" /></th>
 			</tr>
 		</thead>
 		<tbody>
-			<logic:iterate name="CONTACT" id="contact">
+			<logic:iterate name="LISTECONTACTS" id="contact">
 				<tr>
 					<td><bean:write name="contact" property="id" /></td>
 					<td><bean:write name="contact" property="firstName" /></td>
 					<td><bean:write name="contact" property="lastName" /></td>
 					<td><bean:write name="contact" property="email" /></td>
+					<td><html:link action="ContactDisplay.do" paramId="id"
+							paramName="contact" paramProperty="id">
+							<bean:message key="contact.display.link" />
+						</html:link></td>
+					<td><html:link action="ContactDeletion.do" paramId="id"
+							paramName="contact" paramProperty="id">
+							<bean:message key="main.deletecontact.link" />
+						</html:link></td>
+					<td><html:link action="UpdateC.do" paramId="id"
+							paramName="contact" paramProperty="id">
+							<bean:message key="contact.all.update" />
+						</html:link></td>
 				</tr>
 			</logic:iterate>
 		</tbody>

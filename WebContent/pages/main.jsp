@@ -24,7 +24,11 @@
 				key="main.addgroup.link" /></a>
 	</h4>
 	<h4>
-		<a href="ContactDisplay.do"><bean:message
+		<a href="GroupContactCreation.do"><bean:message
+				key="main.addcontactgroup.link" /></a>
+	</h4>
+	<h4>
+		<a href="AllContactDisplay.do"><bean:message
 				key="main.contactdisplay.link" /></a>
 	</h4>
 </body>

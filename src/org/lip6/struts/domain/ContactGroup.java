@@ -4,6 +4,11 @@ public class ContactGroup {
 
 	private long groupId;
 	private String groupName;
+	
+	public ContactGroup(long groupId, String groupName) {
+		this.groupId = groupId;
+		this.groupName = groupName;
+	}
 
 	/**
 	 * @return ID Returns ID

@@ -10,22 +10,22 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.lip6.struts.actionForm.AddGroupValidationForm;
+import org.lip6.struts.actionForm.CompositionGroupContactValidationForm;
 import org.lip6.struts.domain.DAOGroup;
 
-public class AddGroupAction extends Action {
+public class GroupAddContactAction extends Action {
 
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
 
-		final AddGroupValidationForm lForm = (AddGroupValidationForm) pForm;
+		final CompositionGroupContactValidationForm lForm = (CompositionGroupContactValidationForm) pForm;
 
-		final long id = lForm.getId();
-		final String name = lForm.getName().trim().replaceAll(" +", " ");
+		final long idContact = lForm.getIdContact();
+		final long idGroup = lForm.getIdGroup();
 		
 		final DAOGroup lDAOGroup = new DAOGroup();
 		
-		final String lError = lDAOGroup.addGroup(id, name);
+		final String lError = lDAOGroup.addGroupContact(idContact, idGroup);
 
 		if (lError == null) {
 			// if no exception is raised, forward "success"

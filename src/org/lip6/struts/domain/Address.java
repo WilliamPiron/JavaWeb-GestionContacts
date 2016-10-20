@@ -7,6 +7,13 @@ public class Address {
 	private String city;
 	private String zip;
 	private String country;
+	
+	public Address(long id, String street, String city, String zip, String country) {
+		this.id = id;
+		this.city = city;
+		this.zip = zip;
+		this.country = country;
+	}
 
 	/**
 	 * @return ID Returns ID

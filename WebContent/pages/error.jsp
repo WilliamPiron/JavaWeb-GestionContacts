@@ -8,7 +8,6 @@
 </head>
 <body>
 	<html:errors />
-	<h1><bean:message key="error.id.exist" /></h1>
 	<h4>
 		<a href="Main.do"><bean:message
 				key="main.redirection" /></a>

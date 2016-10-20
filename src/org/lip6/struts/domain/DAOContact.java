@@ -22,10 +22,12 @@ public class DAOContact {
 
 		System.out.println("Entre dans creation contact DAO");
 
+		Connection lConnection = null;
+
 		try {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
-			final Connection lConnection = lDataSource.getConnection();
+			lConnection = lDataSource.getConnection();
 
 			// Contact
 			final PreparedStatement lPreparedStatementCreation =
@@ -69,7 +71,7 @@ public class DAOContact {
 				lPreparedStatementPhoneCreation.setString(3, phoneNumber);
 				lPreparedStatementPhoneCreation.executeUpdate();
 			}
-			
+
 			return null;
 		} catch (NamingException e) {
 
@@ -79,42 +81,49 @@ public class DAOContact {
 
 			return "SQLException : " + e.getMessage();
 
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				return "Erreur : " + e.getMessage();
+			}
 		}
 	}
-	
-	public DisplayContact displayContacts() {
 
-		System.out.println("Entre dans affichage contact DAO");
-		
-		final DisplayContact display = new DisplayContact();
+	public DisplayAllContact displayAllContacts() {
+
+		System.out.println("Entre dans affichage tous les contact DAO");
+
+		Connection lConnection = null;
+		final DisplayAllContact display = new DisplayAllContact();
 
 		try {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
-			final Connection lConnection = lDataSource.getConnection();
-			
+			lConnection = lDataSource.getConnection();
+
 			final List<Contact> contacts = new LinkedList<Contact>();
 
-			final PreparedStatement lPreparedStatementCreation =
+			final PreparedStatement lPreparedStatementContact =
 
-					lConnection
-							.prepareStatement("SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact");
-			
-			ResultSet rs = lPreparedStatementCreation.executeQuery();
-			
-			while(rs.next()) {
-				final Long id = rs.getLong("ID");
-				final String lastName = rs.getString("LASTNAME");
-				final String firstName = rs.getString("FIRSTNAME");
-				final String email = rs.getString("EMAIL");
-				
+					lConnection.prepareStatement("SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact");
+
+			ResultSet rsContact = lPreparedStatementContact.executeQuery();
+
+			while (rsContact.next()) {
+				final Long id = rsContact.getLong("ID");
+				final String lastName = rsContact.getString("LASTNAME");
+				final String firstName = rsContact.getString("FIRSTNAME");
+				final String email = rsContact.getString("EMAIL");
+
 				System.out.println(id + " " + lastName + " " + firstName + " " + email);
-				
+
 				contacts.add(new Contact(id, lastName, firstName, email, null, null, null));
 			}
-			
+
 			display.setContacts(contacts);
-			
+
 		} catch (NamingException e) {
 
 			System.out.println(e.getMessage());
@@ -125,7 +134,252 @@ public class DAOContact {
 			System.out.println(e.getMessage());
 			display.setError("SQLException : " + e.getMessage());
 
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				display.setError("Erreur : " + e.getMessage());
+			}
 		}
 		return display;
+	}
+
+	public DisplayAllContact displayContact(int idContact) {
+
+		System.out.println("Entre dans affichage contact DAO");
+
+		Connection lConnection = null;
+		final DisplayAllContact display = new DisplayAllContact();
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			final List<Contact> contacts = new LinkedList<Contact>();
+
+			final PreparedStatement lPreparedStatementContact =
+
+					lConnection.prepareStatement("SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact WHERE id=?");
+
+			lPreparedStatementContact.setLong(1, idContact);
+			ResultSet rsContact = lPreparedStatementContact.executeQuery();
+
+			while (rsContact.next()) {
+				final Long id = rsContact.getLong("ID");
+				final String lastName = rsContact.getString("LASTNAME");
+				final String firstName = rsContact.getString("FIRSTNAME");
+				final String email = rsContact.getString("EMAIL");
+
+				System.out.println(id + " " + lastName + " " + firstName + " " + email);
+
+				contacts.add(new Contact(id, lastName, firstName, email, null, null, null));
+			}
+
+			display.setContacts(contacts);
+
+		} catch (NamingException e) {
+
+			System.out.println(e.getMessage());
+			display.setError("NamingException : " + e.getMessage());
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+			display.setError("SQLException : " + e.getMessage());
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				display.setError("Erreur : " + e.getMessage());
+			}
+		}
+		return display;
+	}
+
+	public String deleteContact(long id) {
+
+		System.out.println("Entre dans deleteContact");
+
+		Connection lConnection = null;
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			// deleting a contact
+			PreparedStatement lPreparedStatementDeletion =
+
+					lConnection.prepareStatement("DELETE FROM contact WHERE ID=?");
+
+			lPreparedStatementDeletion.setLong(1, id);
+			lPreparedStatementDeletion.executeUpdate();
+
+			PreparedStatement lPreparedStatementDeletionComposition = lConnection
+					.prepareStatement("DELETE FROM GROUPCOMPOSITION WHERE IDCONTACT=?");
+
+			lPreparedStatementDeletionComposition.setLong(1, id);
+			lPreparedStatementDeletionComposition.executeUpdate();
+
+			PreparedStatement lPreparedStatementDeletionAddress = lConnection
+					.prepareStatement("DELETE FROM ADDRESS WHERE ID=?");
+
+			lPreparedStatementDeletionAddress.setLong(1, id);
+			lPreparedStatementDeletionAddress.executeUpdate();
+
+			PreparedStatement lPreparedStatementDeletionPhone = lConnection
+					.prepareStatement("DELETE FROM PHONENUMBER WHERE ID=?");
+
+			lPreparedStatementDeletionPhone.setLong(1, id);
+			lPreparedStatementDeletionPhone.executeUpdate();
+
+			return null;
+
+		} catch (NamingException e) {
+
+			return "NamingException : " + e.getMessage();
+
+		} catch (SQLException e) {
+
+			return "SQLException : " + e.getMessage();
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				return "Erreur : " + e.getMessage();
+			}
+		}
+	}
+
+	public String updateContact(final long id, final String firstName, final String lastName, final String email,
+			final long idAddress, final String street, final String city, final String zip, final String country,
+			final long idPhone, final String phoneKind, final String phoneNumber) {
+
+		System.out.println("Entre dans updateContact : " + id + " " + firstName + " " + street);
+
+		Connection lConnection = null;
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			PreparedStatement lPreparedStatementUpdate =
+
+					lConnection.prepareStatement("UPDATE contact SET LASTNAME=?, FIRSTNAME=?, EMAIL=? WHERE id=?");
+
+			lPreparedStatementUpdate.setString(1, lastName);
+			lPreparedStatementUpdate.setString(2, firstName);
+			lPreparedStatementUpdate.setString(3, email);
+			lPreparedStatementUpdate.setLong(4, id);
+			lPreparedStatementUpdate.executeUpdate();
+
+			PreparedStatement lPreparedStatementAddressExist =
+
+					lConnection.prepareStatement("SELECT * FROM address WHERE id=?");
+
+			lPreparedStatementAddressExist.setLong(1, id);
+			ResultSet rsAddress = lPreparedStatementAddressExist.executeQuery();
+
+			if (!street.isEmpty() && rsAddress.next()) {
+				PreparedStatement lPreparedStatementUpdateAddress =
+
+						lConnection.prepareStatement(
+								"UPDATE address SET address.ID=?, STREET=?, CITY=?, ZIP=?, COUNTRY=? WHERE id=?");
+
+				lPreparedStatementUpdateAddress.setLong(1, idAddress);
+				lPreparedStatementUpdateAddress.setString(2, street);
+				lPreparedStatementUpdateAddress.setString(3, city);
+				lPreparedStatementUpdateAddress.setString(4, zip);
+				lPreparedStatementUpdateAddress.setString(5, country);
+				lPreparedStatementUpdateAddress.setLong(6, id);
+				lPreparedStatementUpdateAddress.executeUpdate();
+			} else if (!street.isEmpty() && !rsAddress.next()) {
+				PreparedStatement lPreparedStatementUpdateAddress =
+
+						lConnection.prepareStatement(
+								"INSERT INTO ADDRESS(ID, STREET, CITY, ZIP, COUNTRY) VALUES(?, ?, ?, ?, ?)");
+
+				lPreparedStatementUpdateAddress.setLong(1, idAddress);
+				lPreparedStatementUpdateAddress.setString(2, street);
+				lPreparedStatementUpdateAddress.setString(3, city);
+				lPreparedStatementUpdateAddress.setString(4, zip);
+				lPreparedStatementUpdateAddress.setString(5, country);
+				lPreparedStatementUpdateAddress.executeUpdate();
+			} else {
+				PreparedStatement lPreparedStatementDeletionAddress = lConnection
+						.prepareStatement("DELETE FROM ADDRESS WHERE ID=?");
+
+				lPreparedStatementDeletionAddress.setLong(1, id);
+				lPreparedStatementDeletionAddress.executeUpdate();
+			}
+			
+			
+			
+			
+			
+			
+			
+			PreparedStatement lPreparedStatementPhoneExist =
+
+					lConnection.prepareStatement("SELECT * FROM phonenumber WHERE id=?");
+
+			lPreparedStatementPhoneExist.setLong(1, id);
+			ResultSet rsPhone = lPreparedStatementPhoneExist.executeQuery();
+
+			if (!phoneKind.isEmpty() && rsPhone.next()) {
+				PreparedStatement lPreparedStatementUpdatePhone =
+
+						lConnection.prepareStatement(
+								"UPDATE phonenumber SET phonenumber.ID=?, PHONEKIND=?, PHONENUMBER=? WHERE id=?");
+
+				lPreparedStatementUpdatePhone.setLong(1, idPhone);
+				lPreparedStatementUpdatePhone.setString(2, phoneKind);
+				lPreparedStatementUpdatePhone.setString(3, phoneNumber);
+				lPreparedStatementUpdatePhone.setLong(4, id);
+				lPreparedStatementUpdatePhone.executeUpdate();
+				
+			} else if (!phoneKind.isEmpty() && !rsPhone.next()) {
+				PreparedStatement lPreparedStatementUpdatePhone =
+
+						lConnection.prepareStatement(
+								"INSERT INTO PHONENUMBER(ID, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
+
+				lPreparedStatementUpdatePhone.setLong(1, idPhone);
+				lPreparedStatementUpdatePhone.setString(2, phoneKind);
+				lPreparedStatementUpdatePhone.setString(3, phoneNumber);
+				lPreparedStatementUpdatePhone.executeUpdate();
+			} else {
+				PreparedStatement lPreparedStatementDeletionPhone = lConnection
+						.prepareStatement("DELETE FROM PHONENUMBER WHERE ID=?");
+
+				lPreparedStatementDeletionPhone.setLong(1, id);
+				lPreparedStatementDeletionPhone.executeUpdate();
+			}
+
+			return null;
+
+		} catch (NamingException e) {
+
+			return "NamingException : " + e.getMessage();
+
+		} catch (SQLException e) {
+
+			return "SQLException : " + e.getMessage();
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				return "Erreur : " + e.getMessage();
+			}
+		}
 	}
 }
