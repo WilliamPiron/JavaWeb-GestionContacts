@@ -34,6 +34,11 @@
 						<bean:message key="form.validation" />
 					</html:submit></td>
 			</tr>
+			<tr>
+				<td align="right"><html:reset>
+						<bean:message key="form.reset" />
+					</html:reset></td>
+			</tr>
 		</table>
 	</html:form>
 </body>
