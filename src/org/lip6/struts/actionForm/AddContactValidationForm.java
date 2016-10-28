@@ -228,7 +228,7 @@ public class AddContactValidationForm extends ActionForm {
 			if (getCity().trim() == null || getCity().trim().length() < 1) {
 				errors.add("city", new ActionMessage("creation.city.error.required"));
 			}
-			if (getZip().trim() == null || getZip().trim().length() < 1) {
+			if (getZip().trim() == null || getZip().trim().length() < 1 || !getZip().matches("[0-9]+")) {
 				errors.add("zip", new ActionMessage("creation.zip.error.required"));
 			}
 			if (getCountry().trim() == null || getCountry().trim().length() < 1) {
@@ -241,7 +241,7 @@ public class AddContactValidationForm extends ActionForm {
 			if (getPhoneKind().trim() == null || getPhoneKind().trim().length() < 1) {
 				errors.add("phoneKind", new ActionMessage("creation.phonekind.error.required"));
 			}
-			if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 1) {
+			if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 1 || !getPhoneNumber().matches("[0-9]+")) {
 				errors.add("phoneNumber", new ActionMessage("creation.phonenumber.error.required"));
 			}
 		}

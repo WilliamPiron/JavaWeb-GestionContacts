@@ -56,7 +56,7 @@
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.zip" /></td>
 				<td align="left"><html:text property="zip" size="30"
-						maxlength="50" /></td>
+						maxlength="25" /></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.country" /></td>
