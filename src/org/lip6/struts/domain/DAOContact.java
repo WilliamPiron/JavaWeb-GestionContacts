@@ -117,8 +117,6 @@ public class DAOContact {
 				final String firstName = rsContact.getString("FIRSTNAME");
 				final String email = rsContact.getString("EMAIL");
 
-				System.out.println(id + " " + lastName + " " + firstName + " " + email);
-
 				contacts.add(new Contact(id, lastName, firstName, email, null, null, null));
 			}
 
@@ -161,7 +159,7 @@ public class DAOContact {
 
 			final PreparedStatement lPreparedStatementContact =
 
-					lConnection.prepareStatement("SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact WHERE id=?");
+					lConnection.prepareStatement("SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact WHERE ID=?");
 
 			lPreparedStatementContact.setLong(1, idContact);
 			ResultSet rsContact = lPreparedStatementContact.executeQuery();
@@ -172,9 +170,47 @@ public class DAOContact {
 				final String firstName = rsContact.getString("FIRSTNAME");
 				final String email = rsContact.getString("EMAIL");
 
-				System.out.println(id + " " + lastName + " " + firstName + " " + email);
+				Address address = null;
 
-				contacts.add(new Contact(id, lastName, firstName, email, null, null, null));
+				final PreparedStatement lPreparedStatementAddress =
+
+						lConnection.prepareStatement("SELECT STREET, CITY, ZIP, COUNTRY FROM address WHERE ID=?");
+
+				lPreparedStatementAddress.setLong(1, idContact);
+				ResultSet rsAddress = lPreparedStatementAddress.executeQuery();
+
+				while (rsAddress.next()) {
+					final String street = rsAddress.getString("STREET");
+					final String city = rsAddress.getString("CITY");
+					final String zip = rsAddress.getString("ZIP");
+					final String country = rsAddress.getString("COUNTRY");
+
+					address = new Address(id, street, city, zip, country);
+					System.out.println("STREET : " + street + ", ID : " + id);
+				}
+				final List<ContactGroup> groups = new LinkedList<ContactGroup>();
+
+				final PreparedStatement lPreparedStatementGroup =
+
+						lConnection.prepareStatement(
+								"SELECT GROUPID, GROUPNAME FROM contactgroup INNER JOIN groupcomposition "
+										+ "ON groupcomposition.IDGROUP = contactgroup.GROUPID AND groupcomposition.IDCONTACT = ?");
+
+				lPreparedStatementGroup.setLong(1, id);
+
+				ResultSet rsGroup = lPreparedStatementGroup.executeQuery();
+
+				while (rsGroup.next()) {
+					final Long groupId = rsGroup.getLong("GROUPID");
+					final String groupName = rsGroup.getString("GROUPNAME");
+
+					groups.add(new ContactGroup(groupId, groupName));
+
+					System.out.println("id groupe : " + groupId + ", name : " + groupName);
+				}
+
+				contacts.add(new Contact(id, lastName, firstName, email, address,
+						null, groups));
 			}
 
 			display.setContacts(contacts);
@@ -319,13 +355,7 @@ public class DAOContact {
 				lPreparedStatementDeletionAddress.setLong(1, id);
 				lPreparedStatementDeletionAddress.executeUpdate();
 			}
-			
-			
-			
-			
-			
-			
-			
+
 			PreparedStatement lPreparedStatementPhoneExist =
 
 					lConnection.prepareStatement("SELECT * FROM phonenumber WHERE id=?");
@@ -344,7 +374,7 @@ public class DAOContact {
 				lPreparedStatementUpdatePhone.setString(3, phoneNumber);
 				lPreparedStatementUpdatePhone.setLong(4, id);
 				lPreparedStatementUpdatePhone.executeUpdate();
-				
+
 			} else if (!phoneKind.isEmpty() && !rsPhone.next()) {
 				PreparedStatement lPreparedStatementUpdatePhone =
 
