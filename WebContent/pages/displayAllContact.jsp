@@ -45,9 +45,45 @@
 			</logic:iterate>
 		</tbody>
 	</table>
+	<html:form action="/AddContact">
+		<html:errors />
+		<table border="1">
+			<thead>
+				<tr>
+					<th><bean:message key="add.contact.form.id" /></th>
+					<th><bean:message key="add.contact.form.lastname" /></th>
+					<th><bean:message key="add.contact.form.firstname" /></th>
+					<th><bean:message key="add.contact.form.email" /></th>
+					<th><bean:message key="add.contact.form.street" /></th>
+					<th><bean:message key="add.contact.form.city" /></th>
+					<th><bean:message key="add.contact.form.zip" /></th>
+					<th><bean:message key="add.contact.form.country" /></th>
+					<th><bean:message key="form.validation" /></th>
+					<th><bean:message key="form.reset" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><html:text property="id" maxlength="9" size="10" /></td>
+					<td><html:text property="lastName" maxlength="50" /></td>
+					<td><html:text property="firstName" maxlength="50" /></td>
+					<td><html:text property="email" maxlength="50" /></td>
+					<td><html:text property="street" maxlength="50" /></td>
+					<td><html:text property="city" maxlength="50" /></td>
+					<td><html:text property="zip" maxlength="25" /></td>
+					<td><html:text property="country" maxlength="50" /></td>
+					<td><html:submit>
+							<bean:message key="form.validation" />
+						</html:submit></td>
+					<td><html:reset>
+							<bean:message key="form.reset" />
+						</html:reset></td>
+				</tr>
+			</tbody>
+		</table>
+	</html:form>
 	<h4>
-		<a href="Main.do"><bean:message
-				key="main.redirection" /></a>
+		<a href="Main.do"><bean:message key="main.redirection" /></a>
 	</h4>
 </body>
 </html:html>

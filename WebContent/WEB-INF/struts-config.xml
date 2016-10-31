@@ -17,7 +17,6 @@
   <action-mappings>
   
     <action path="/Main" forward="/pages/main.jsp" />
-	<action path="/ContactCreation" forward="/pages/creationContact.jsp" />
 	<action path="/Connexion" forward="/pages/index.jsp" />
 	<action path="/GroupCreation" forward="/pages/creationGroup.jsp" />
 	<action path="/GroupContactCreation" forward="/pages/compositionGroupContact.jsp" />
@@ -27,7 +26,7 @@
     <action path="/AddContact" 
 				type="org.lip6.struts.servletAction.AddContactAction"
 				name="AddContactValidationForm" scope="request" 
-				input="/pages/creationContact.jsp">
+				input="/pages/displayAllContact.jsp">
 				
 			<forward name="success" path="/pages/success.jsp" />
 			<forward name="error" path="/pages/error.jsp" />

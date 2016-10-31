@@ -159,16 +159,16 @@ public class UpdateContactValidationForm extends ActionForm {
 		this.email = display.getContacts().get(0).getEmail();
 
 		// Address
-		if(display.getContacts().get(0).getAddress() == null) {
+		if(display.getContacts().get(0).getAddress().isEmpty()) {
 			this.street = null;
 			this.city = null;
 			this.zip = null;
 			this.country = null;
 		} else {
-			this.street = display.getContacts().get(0).getAddress().getStreet();
-			this.city = display.getContacts().get(0).getAddress().getCity();
-			this.zip = display.getContacts().get(0).getAddress().getZip();
-			this.country = display.getContacts().get(0).getAddress().getCountry();
+			this.street = display.getContacts().get(0).getAddress().get(0).getStreet();
+			this.city = display.getContacts().get(0).getAddress().get(0).getCity();
+			this.zip = display.getContacts().get(0).getAddress().get(0).getZip();
+			this.country = display.getContacts().get(0).getAddress().get(0).getCountry();
 		}
 	}
 

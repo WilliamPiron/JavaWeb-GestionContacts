@@ -5,6 +5,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.lip6.struts.domain.DAOContact;
+import org.lip6.struts.domain.DisplayAllContact;
 
 public class AddContactValidationForm extends ActionForm {
 
@@ -158,7 +160,20 @@ public class AddContactValidationForm extends ActionForm {
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+		
 		ActionErrors errors = new ActionErrors();
+		
+		System.out.println("Entre dans add contact validation");
+		
+		final DAOContact daoContact = new DAOContact();
+		final DisplayAllContact display = daoContact.displayAllContacts();
+		
+		if(display.getError() == null) {
+			request.setAttribute("LISTECONTACTS", display.getContacts());
+		} else {
+			errors.add("database", new ActionMessage("database.error"));
+			return errors;
+		}
 
 		// Contact
 		if (getId() < 1) {

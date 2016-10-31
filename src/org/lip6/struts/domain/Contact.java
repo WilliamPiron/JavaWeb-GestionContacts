@@ -15,11 +15,11 @@ public class Contact implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Address address;
+	private List<Address> address;
 	private List<PhoneNumber> phone;
 	private List<ContactGroup> group;
 
-	public Contact(long id, String firstName, String lastName, String email, Address address, List<PhoneNumber> phone,
+	public Contact(long id, String firstName, String lastName, String email, List<Address> address, List<PhoneNumber> phone,
 			List<ContactGroup> group) {
 		this.id = id;
 		this.firstName = firstName;
@@ -63,7 +63,7 @@ public class Contact implements Serializable {
 	/**
 	 * @return Address
 	 */
-	public Address getAddress() {
+	public List<Address> getAddress() {
 		return address;
 	}
 
@@ -124,7 +124,7 @@ public class Contact implements Serializable {
 	 * @param string
 	 *            Sets the Address
 	 */
-	public void setAddress(Address address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 

@@ -14,11 +14,6 @@
 	<h1>
 		<bean:message key="main.page.menu" />
 	</h1>
-
-	<h4>
-		<a href="ContactCreation.do"><bean:message
-				key="main.addcontact.link" /></a>
-	</h4>
 	<h4>
 		<a href="GroupCreation.do"><bean:message
 				key="main.addgroup.link" /></a>

@@ -156,7 +156,7 @@ public class DAOContact {
 				final String firstName = rsContact.getString("FIRSTNAME");
 				final String email = rsContact.getString("EMAIL");
 
-				Address address = null;
+				final List<Address> address = new LinkedList<Address>();
 
 				final PreparedStatement lPreparedStatementAddress =
 
@@ -172,7 +172,7 @@ public class DAOContact {
 					final String zip = rsAddress.getString("ZIP");
 					final String country = rsAddress.getString("COUNTRY");
 
-					address = new Address(id, street, city, zip, country);
+					address.add(new Address(id, street, city, zip, country));
 				}
 
 				final List<ContactGroup> groups = new LinkedList<ContactGroup>();
