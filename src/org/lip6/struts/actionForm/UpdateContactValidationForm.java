@@ -23,10 +23,6 @@ public class UpdateContactValidationForm extends ActionForm {
 	private String city = null;
 	private String zip = null;
 	private String country = null;
-
-	// Phone
-	private String phoneKind = null;
-	private String phoneNumber = null;
 	
 	/**
 	 * @return ID Returns ID
@@ -82,20 +78,6 @@ public class UpdateContactValidationForm extends ActionForm {
 	 */
 	public String getCountry() {
 		return country;
-	}
-
-	/**
-	 * @return Phone kind
-	 */
-	public String getPhoneKind() {
-		return phoneKind;
-	}
-
-	/**
-	 * @return Phone number
-	 */
-	public String getPhoneNumber() {
-		return phoneNumber;
 	}
 	
 	/**
@@ -162,22 +144,6 @@ public class UpdateContactValidationForm extends ActionForm {
 		country = string;
 	}
 
-	/**
-	 * @param string
-	 *            sets the Phone kind
-	 */
-	public void setPhoneKind(String string) {
-		phoneKind = string;
-	}
-
-	/**
-	 * @param string
-	 *            sets the Phone number
-	 */
-	public void setPhoneNumber(String string) {
-		phoneNumber = string;
-	}
-
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		
 		DAOContact daoContact = new DAOContact();
@@ -203,15 +169,6 @@ public class UpdateContactValidationForm extends ActionForm {
 			this.city = display.getContacts().get(0).getAddress().getCity();
 			this.zip = display.getContacts().get(0).getAddress().getZip();
 			this.country = display.getContacts().get(0).getAddress().getCountry();
-		}
-		
-		//Phone
-		if(display.getContacts().get(0).getPhone() == null) {
-			this.phoneKind = null;
-			this.phoneNumber = null;
-		} else {
-			this.phoneKind = display.getContacts().get(0).getPhone().get(0).getPhoneKind();
-			this.phoneNumber = display.getContacts().get(0).getPhone().get(0).getPhoneNumber();
 		}
 	}
 
@@ -255,16 +212,6 @@ public class UpdateContactValidationForm extends ActionForm {
 			}
 			if (getCountry().trim() == null || getCountry().trim().length() < 1) {
 				errors.add("country", new ActionMessage("creation.country.error.required"));
-			}
-		}
-
-		// Phone
-		if (!getPhoneKind().trim().isEmpty() || !getPhoneNumber().trim().isEmpty()) {
-			if (getPhoneKind().trim() == null || getPhoneKind().trim().length() < 1) {
-				errors.add("phoneKind", new ActionMessage("creation.phonekind.error.required"));
-			}
-			if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 1) {
-				errors.add("phoneNumber", new ActionMessage("creation.phonenumber.error.required"));
 			}
 		}
 

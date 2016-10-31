@@ -17,8 +17,7 @@ public class DAOContact {
 	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/gestioncontacts";
 
 	public String addContact(final long id, final String firstName, final String lastName, final String email,
-			final long idAddress, final String street, final String city, final String zip, final String country,
-			final String phoneKind, final String phoneNumber) {
+			final long idAddress, final String street, final String city, final String zip, final String country) {
 
 		System.out.println("Entre dans creation contact DAO");
 
@@ -57,19 +56,6 @@ public class DAOContact {
 				lPreparedStatementAddressCreation.setString(4, zip);
 				lPreparedStatementAddressCreation.setString(5, country);
 				lPreparedStatementAddressCreation.executeUpdate();
-			}
-
-			// Phone
-			if (!phoneKind.isEmpty()) {
-				PreparedStatement lPreparedStatementPhoneCreation =
-
-						lConnection.prepareStatement(
-								"INSERT INTO PHONENUMBER(IDCONTACT, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
-
-				lPreparedStatementPhoneCreation.setLong(1, id);
-				lPreparedStatementPhoneCreation.setString(2, phoneKind);
-				lPreparedStatementPhoneCreation.setString(3, phoneNumber);
-				lPreparedStatementPhoneCreation.executeUpdate();
 			}
 
 			return null;
@@ -178,10 +164,9 @@ public class DAOContact {
 
 				lPreparedStatementAddress.setLong(1, idContact);
 				ResultSet rsAddress = lPreparedStatementAddress.executeQuery();
-				
-				
+
 				while (rsAddress.next()) {
-					
+
 					final String street = rsAddress.getString("STREET");
 					final String city = rsAddress.getString("CITY");
 					final String zip = rsAddress.getString("ZIP");
@@ -189,7 +174,7 @@ public class DAOContact {
 
 					address = new Address(id, street, city, zip, country);
 				}
-				
+
 				final List<ContactGroup> groups = new LinkedList<ContactGroup>();
 
 				final PreparedStatement lPreparedStatementGroup =
@@ -210,7 +195,7 @@ public class DAOContact {
 
 					System.out.println("id groupe : " + groupId + ", name : " + groupName);
 				}
-				
+
 				final List<PhoneNumber> phones = new LinkedList<PhoneNumber>();
 
 				final PreparedStatement lPreparedStatementPhone =
@@ -318,8 +303,7 @@ public class DAOContact {
 	}
 
 	public String updateContact(final long id, final String firstName, final String lastName, final String email,
-			final String street, final String city, final String zip, final String country, final String phoneKind,
-			final String phoneNumber) {
+			final String street, final String city, final String zip, final String country) {
 
 		System.out.println("Entre dans updateContact : " + id + " " + firstName + " " + street);
 
@@ -379,41 +363,7 @@ public class DAOContact {
 				lPreparedStatementDeletionAddress.setLong(1, id);
 				lPreparedStatementDeletionAddress.executeUpdate();
 			}
-
-			PreparedStatement lPreparedStatementPhoneExist =
-
-					lConnection.prepareStatement("SELECT * FROM phonenumber WHERE id=?");
-
-			lPreparedStatementPhoneExist.setLong(1, id);
-			ResultSet rsPhone = lPreparedStatementPhoneExist.executeQuery();
-
-			if (!phoneKind.isEmpty() && rsPhone.next()) {
-				PreparedStatement lPreparedStatementUpdatePhone =
-
-						lConnection.prepareStatement("UPDATE phonenumber SET PHONEKIND=?, PHONENUMBER=? WHERE id=?");
-				lPreparedStatementUpdatePhone.setString(1, phoneKind);
-				lPreparedStatementUpdatePhone.setString(2, phoneNumber);
-				lPreparedStatementUpdatePhone.setLong(3, id);
-				lPreparedStatementUpdatePhone.executeUpdate();
-
-			} else if (!phoneKind.isEmpty() && !rsPhone.next()) {
-				PreparedStatement lPreparedStatementUpdatePhone =
-
-						lConnection.prepareStatement(
-								"INSERT INTO PHONENUMBER (IDCONTACT, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
-
-				lPreparedStatementUpdatePhone.setLong(1, id);
-				lPreparedStatementUpdatePhone.setString(2, phoneKind);
-				lPreparedStatementUpdatePhone.setString(3, phoneNumber);
-				lPreparedStatementUpdatePhone.executeUpdate();
-			} else {
-				PreparedStatement lPreparedStatementDeletionPhone = lConnection
-						.prepareStatement("DELETE FROM PHONENUMBER WHERE ID=?");
-
-				lPreparedStatementDeletionPhone.setLong(1, id);
-				lPreparedStatementDeletionPhone.executeUpdate();
-			}
-
+			
 			return null;
 
 		} catch (NamingException e) {

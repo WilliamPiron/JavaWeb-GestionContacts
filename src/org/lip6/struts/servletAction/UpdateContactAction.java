@@ -32,13 +32,9 @@ public class UpdateContactAction extends Action {
 		final String zip = lForm.getZip().trim().replaceAll(" +", " ");
 		final String country = lForm.getCountry().trim().replaceAll(" +", " ");
 
-		final String phoneKind = lForm.getPhoneKind().trim().replaceAll(" +", " ");
-		final String phoneNumber = lForm.getPhoneNumber().trim().replaceAll(" +", " ");
-
 		final DAOContact lDAOContact = new DAOContact();
 
-		final String lError = lDAOContact.updateContact(id, firstName, lastName, email, street, city, zip, country,
-				phoneKind, phoneNumber);
+		final String lError = lDAOContact.updateContact(id, firstName, lastName, email, street, city, zip, country);
 
 		if (lError == null) {
 

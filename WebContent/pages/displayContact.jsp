@@ -11,6 +11,8 @@
 <title><bean:message key="display.contact.title" /></title>
 </head>
 <body>
+
+	<!-- On divise les infos d'un contact en 3 tableaux : contact + adresse, phones et groups -->
 	<table border="1">
 		<thead>
 			<tr>
@@ -18,6 +20,8 @@
 				<th><bean:message key="add.contact.form.lastname" /></th>
 				<th><bean:message key="add.contact.form.firstname" /></th>
 				<th><bean:message key="add.contact.form.email" /></th>
+				
+				<!-- On affiche les colonnes seulement si l'adresse existe -->
 				<logic:present name="ADDRESS">
 					<th><bean:message key="add.contact.form.street" /></th>
 					<th><bean:message key="add.contact.form.city" /></th>
@@ -34,7 +38,7 @@
 					<td><bean:write name="contact" property="lastName" /></td>
 					<td><bean:write name="contact" property="email" /></td>
 				</logic:iterate>
-
+				
 				<logic:present name="ADDRESS">
 					<logic:iterate name="ADDRESS" id="address">
 						<td><bean:write name="address" property="street" /></td>

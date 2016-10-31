@@ -22,10 +22,6 @@ public class AddContactValidationForm extends ActionForm {
 	private String zip = null;
 	private String country = null;
 
-	// Phone
-	private String phoneKind = null;
-	private String phoneNumber = null;
-
 	/**
 	 * @return ID Returns ID
 	 */
@@ -80,20 +76,6 @@ public class AddContactValidationForm extends ActionForm {
 	 */
 	public String getCountry() {
 		return country;
-	}
-
-	/**
-	 * @return Phone kind
-	 */
-	public String getPhoneKind() {
-		return phoneKind;
-	}
-
-	/**
-	 * @return Phone number
-	 */
-	public String getPhoneNumber() {
-		return phoneNumber;
 	}
 
 	/**
@@ -160,22 +142,6 @@ public class AddContactValidationForm extends ActionForm {
 		country = string;
 	}
 
-	/**
-	 * @param string
-	 *            sets the Phone kind
-	 */
-	public void setPhoneKind(String string) {
-		phoneKind = string;
-	}
-
-	/**
-	 * @param string
-	 *            sets the Phone number
-	 */
-	public void setPhoneNumber(String string) {
-		phoneNumber = string;
-	}
-
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 
 		// Contact
@@ -189,10 +155,6 @@ public class AddContactValidationForm extends ActionForm {
 		this.city = null;
 		this.zip = null;
 		this.country = null;
-
-		// Phone
-		this.phoneKind = null;
-		this.phoneNumber = null;
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
@@ -233,16 +195,6 @@ public class AddContactValidationForm extends ActionForm {
 			}
 			if (getCountry().trim() == null || getCountry().trim().length() < 1) {
 				errors.add("country", new ActionMessage("creation.country.error.required"));
-			}
-		}
-
-		// Phone
-		if (!getPhoneKind().trim().isEmpty() || !getPhoneNumber().trim().isEmpty()) {
-			if (getPhoneKind().trim() == null || getPhoneKind().trim().length() < 1) {
-				errors.add("phoneKind", new ActionMessage("creation.phonekind.error.required"));
-			}
-			if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 1 || !getPhoneNumber().matches("[0-9]+")) {
-				errors.add("phoneNumber", new ActionMessage("creation.phonenumber.error.required"));
 			}
 		}
 

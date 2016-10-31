@@ -37,20 +37,15 @@ public class AddContactAction extends Action {
 		final String zip = lForm.getZip().trim().replaceAll(" +", " ");
 		final String country = lForm.getCountry().trim().replaceAll(" +", " ");
 
-		// Phone
-		final String phoneKind = lForm.getPhoneKind().trim().replaceAll(" +", " ");
-		final String phoneNumber = lForm.getPhoneNumber().trim().replaceAll(" +", " ");
-
 		// create a new Contact
 		final DAOContact lDAOContact = new DAOContact();
-		final String lError = lDAOContact.addContact(id, firstName, lastName, email, id, street, city, zip, country,
-				phoneKind, phoneNumber);
+		final String lError = lDAOContact.addContact(id, firstName, lastName, email, id, street, city, zip, country);
 
 		if (lError == null) {
-			
+
 			return pMapping.findForward("success");
 		} else {
-			
+
 			final ActionMessages lErreurs = getErrors(pRequest);
 			final ActionMessage lActionMessage = new ActionMessage(lError, false);
 			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
