@@ -20,23 +20,23 @@
 							key="form.info" /></font>
 			</tr>
 			<tr>
-				<td align="right"><bean:message key="add.contact.form.id" /></td>
+				<td align="right"><bean:message key="add.contact.form.id" /> *</td>
 				<td align="left"><html:text property="id" size="30"
 						maxlength="9" /></td>
 			</tr>
 			<tr>
-				<td align="right"><bean:message key="add.contact.form.lastname" /></td>
+				<td align="right"><bean:message key="add.contact.form.lastname" /> *</td>
 				<td align="left"><html:text property="lastName" size="30"
 						maxlength="50" /></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message
-						key="add.contact.form.firstname" /></td>
+						key="add.contact.form.firstname" /> *</td>
 				<td align="left"><html:text property="firstName" size="30"
 						maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td align="right"><bean:message key="add.contact.form.email" /></td>
+				<td align="right"><bean:message key="add.contact.form.email" /> *</td>
 				<td align="left"><html:text property="email" size="30"
 						maxlength="50" /></td>
 			</tr>

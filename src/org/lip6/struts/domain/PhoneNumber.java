@@ -5,6 +5,12 @@ public class PhoneNumber {
 	private long id;
 	private String phoneKind;
 	private String phoneNumber;
+	
+	public PhoneNumber(long id, String phoneKind, String phoneNumber){
+		this.id = id;
+		this.phoneKind = phoneKind;
+		this.phoneNumber = phoneNumber;
+	}
 
 	/**
 	 * @return ID Returns ID

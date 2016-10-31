@@ -43,7 +43,7 @@ public class AddContactAction extends Action {
 
 		// create a new Contact
 		final DAOContact lDAOContact = new DAOContact();
-		final String lError = lDAOContact.addContact(id, firstName, lastName, email, id, street, city, zip, country, id,
+		final String lError = lDAOContact.addContact(id, firstName, lastName, email, id, street, city, zip, country,
 				phoneKind, phoneNumber);
 
 		if (lError == null) {

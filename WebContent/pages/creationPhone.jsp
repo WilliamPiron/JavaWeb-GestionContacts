@@ -25,13 +25,15 @@
 						maxlength="9" /></td>
 			</tr>
 			<tr>
-				<td align="right"><bean:message key="add.phone.form.phonenumber" /></td>
-				<td align="left"><html:text property="name" size="30"
+				<td align="right"><bean:message
+						key="add.contact.form.phonekind" /></td>
+				<td align="left"><html:text property="phoneKind" size="30"
 						maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td align="right"><bean:message key="add.phone.form.phonekind" /></td>
-				<td align="left"><html:text property="name" size="30"
+				<td align="right"><bean:message
+						key="add.contact.form.phonenumber" /></td>
+				<td align="left"><html:text property="phoneNumber" size="30"
 						maxlength="50" /></td>
 			</tr>
 			<tr>

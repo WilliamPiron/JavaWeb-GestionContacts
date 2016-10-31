@@ -31,5 +31,9 @@
 		<a href="AllContactDisplay.do"><bean:message
 				key="main.contactdisplay.link" /></a>
 	</h4>
+	<h4>
+		<a href="PhoneCreation.do"><bean:message
+				key="main.phone.link" /></a>
+	</h4>
 </body>
 </html:html>

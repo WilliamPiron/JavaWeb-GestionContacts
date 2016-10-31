@@ -18,7 +18,7 @@ public class DAOContact {
 
 	public String addContact(final long id, final String firstName, final String lastName, final String email,
 			final long idAddress, final String street, final String city, final String zip, final String country,
-			final long idPhone, final String phoneKind, final String phoneNumber) {
+			final String phoneKind, final String phoneNumber) {
 
 		System.out.println("Entre dans creation contact DAO");
 
@@ -64,9 +64,9 @@ public class DAOContact {
 				PreparedStatement lPreparedStatementPhoneCreation =
 
 						lConnection.prepareStatement(
-								"INSERT INTO PHONENUMBER(ID, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
+								"INSERT INTO PHONENUMBER(IDCONTACT, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
 
-				lPreparedStatementPhoneCreation.setLong(1, idPhone);
+				lPreparedStatementPhoneCreation.setLong(1, id);
 				lPreparedStatementPhoneCreation.setString(2, phoneKind);
 				lPreparedStatementPhoneCreation.setString(3, phoneNumber);
 				lPreparedStatementPhoneCreation.executeUpdate();
@@ -209,8 +209,7 @@ public class DAOContact {
 					System.out.println("id groupe : " + groupId + ", name : " + groupName);
 				}
 
-				contacts.add(new Contact(id, lastName, firstName, email, address,
-						null, groups));
+				contacts.add(new Contact(id, lastName, firstName, email, address, null, groups));
 			}
 
 			display.setContacts(contacts);
