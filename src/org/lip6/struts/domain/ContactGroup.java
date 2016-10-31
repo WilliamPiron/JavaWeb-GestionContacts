@@ -39,4 +39,9 @@ public class ContactGroup {
 	public void setGroupName(String string) {
 		groupName = string;
 	}
+
+	@Override
+	public String toString() {
+		return "ContactGroup [groupId=" + groupId + ", groupName=" + groupName + "]";
+	}
 }

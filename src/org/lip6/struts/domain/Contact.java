@@ -151,4 +151,10 @@ public class Contact implements Serializable {
 	public void setError(String string) {
 		error = string;
 	}
+
+	@Override
+	public String toString() {
+		return "Contact [error=" + error + ", id=" + id + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", address=" + address + ", phone=" + phone + ", group=" + group + "]";
+	}
 }

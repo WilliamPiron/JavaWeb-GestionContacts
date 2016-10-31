@@ -5,6 +5,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.lip6.struts.domain.DAOContact;
+import org.lip6.struts.domain.DisplayAllContact;
 
 public class UpdateContactValidationForm extends ActionForm {
 
@@ -177,22 +179,40 @@ public class UpdateContactValidationForm extends ActionForm {
 	}
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-
+		
+		DAOContact daoContact = new DAOContact();
+		
+		final DisplayAllContact display = daoContact.displayContact(Integer.valueOf(request.getParameter("id")));
+		
+		/*On pré-remplie le formulaire d'update*/
+		
 		// Contact
-		this.id = 0;
-		this.firstName = null;
-		this.lastName = null;
-		this.email = null;
+		this.id = display.getContacts().get(0).getId();
+		this.firstName = display.getContacts().get(0).getFirstName();
+		this.lastName = display.getContacts().get(0).getLastName();
+		this.email = display.getContacts().get(0).getEmail();
 
 		// Address
-		this.street = null;
-		this.city = null;
-		this.zip = null;
-		this.country = null;
-
-		// Phone
-		this.phoneKind = null;
-		this.phoneNumber = null;
+		if(display.getContacts().get(0).getAddress() == null) {
+			this.street = null;
+			this.city = null;
+			this.zip = null;
+			this.country = null;
+		} else {
+			this.street = display.getContacts().get(0).getAddress().getStreet();
+			this.city = display.getContacts().get(0).getAddress().getCity();
+			this.zip = display.getContacts().get(0).getAddress().getZip();
+			this.country = display.getContacts().get(0).getAddress().getCountry();
+		}
+		
+		//Phone
+		if(display.getContacts().get(0).getPhone() == null) {
+			this.phoneKind = null;
+			this.phoneNumber = null;
+		} else {
+			this.phoneKind = display.getContacts().get(0).getPhone().get(0).getPhoneKind();
+			this.phoneNumber = display.getContacts().get(0).getPhone().get(0).getPhoneNumber();
+		}
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {

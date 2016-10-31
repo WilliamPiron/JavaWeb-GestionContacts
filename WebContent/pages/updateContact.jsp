@@ -22,7 +22,7 @@
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.id" /></td>
 				<td align="left"><html:text property="id" size="30"
-						maxlength="9" value='<%= request.getParameter("id") %>' readonly="true"/></td>
+						maxlength="9" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.lastname" /></td>
@@ -82,6 +82,11 @@
 				<td align="right"><html:submit>
 						<bean:message key="form.validation" />
 					</html:submit></td>
+			</tr>
+			<tr>
+				<td align="right"><html:reset>
+						<bean:message key="form.reset" />
+					</html:reset></td>
 			</tr>
 		</table>
 	</html:form>

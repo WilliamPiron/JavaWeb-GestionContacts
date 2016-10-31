@@ -10,6 +10,7 @@ public class Address {
 	
 	public Address(long id, String street, String city, String zip, String country) {
 		this.id = id;
+		this.street = street;
 		this.city = city;
 		this.zip = zip;
 		this.country = country;
@@ -80,5 +81,11 @@ public class Address {
 	 */
 	public void setCountry(String string) {
 		country = string;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", city=" + city + ", zip=" + zip + ", country=" + country
+				+ "]";
 	}
 }

@@ -17,7 +17,7 @@ public class UpdateContactAction extends Action {
 
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
-		
+
 		System.out.println("Entre dans action form update contact");
 
 		final UpdateContactValidationForm lForm = (UpdateContactValidationForm) pForm;
@@ -36,9 +36,9 @@ public class UpdateContactAction extends Action {
 		final String phoneNumber = lForm.getPhoneNumber().trim().replaceAll(" +", " ");
 
 		final DAOContact lDAOContact = new DAOContact();
-		
-		final String lError = lDAOContact.updateContact(id, firstName, lastName, email,
-				id, street, city, zip, country, id, phoneKind, phoneNumber);
+
+		final String lError = lDAOContact.updateContact(id, firstName, lastName, email, street, city, zip, country,
+				phoneKind, phoneNumber);
 
 		if (lError == null) {
 

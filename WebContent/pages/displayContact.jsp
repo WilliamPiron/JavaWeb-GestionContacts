@@ -18,19 +18,71 @@
 				<th><bean:message key="add.contact.form.lastname" /></th>
 				<th><bean:message key="add.contact.form.firstname" /></th>
 				<th><bean:message key="add.contact.form.email" /></th>
+				<logic:present name="ADDRESS">
+					<th><bean:message key="add.contact.form.street" /></th>
+					<th><bean:message key="add.contact.form.city" /></th>
+					<th><bean:message key="add.contact.form.zip" /></th>
+					<th><bean:message key="add.contact.form.country" /></th>
+				</logic:present>
 			</tr>
 		</thead>
 		<tbody>
-			<logic:iterate name="CONTACT" id="contact">
-				<tr>
+			<tr>
+				<logic:iterate name="CONTACT" id="contact">
 					<td><bean:write name="contact" property="id" /></td>
 					<td><bean:write name="contact" property="firstName" /></td>
 					<td><bean:write name="contact" property="lastName" /></td>
 					<td><bean:write name="contact" property="email" /></td>
-				</tr>
+				</logic:iterate>
+
+				<logic:present name="ADDRESS">
+					<logic:iterate name="ADDRESS" id="address">
+						<td><bean:write name="address" property="street" /></td>
+						<td><bean:write name="address" property="city" /></td>
+						<td><bean:write name="address" property="zip" /></td>
+						<td><bean:write name="address" property="country" /></td>
+					</logic:iterate>
+				</logic:present>
+			</tr>
+		</tbody>
+	</table>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th><bean:message key="add.contact.form.phonekind" /></th>
+				<th><bean:message key="add.contact.form.phonenumber" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<logic:iterate name="CONTACT" id="contact">
+				<logic:iterate name="contact" property="phone" id="phones">
+					<tr>
+						<td><bean:write name="phones" property="phoneKind" /></td>
+						<td><bean:write name="phones" property="phoneNumber" /></td>
+					</tr>
+				</logic:iterate>
 			</logic:iterate>
 		</tbody>
 	</table>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th><bean:message key="add.contact.form.groupname" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<logic:iterate name="CONTACT" id="contact">
+				<logic:iterate name="contact" property="group" id="groups">
+					<tr>
+						<td><bean:write name="groups" property="groupName" /></td>
+					</tr>
+				</logic:iterate>
+			</logic:iterate>
+		</tbody>
+	</table>
+
 	<h4>
 		<a href="Main.do"><bean:message key="main.redirection" /></a>
 	</h4>
