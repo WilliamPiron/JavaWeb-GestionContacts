@@ -28,6 +28,19 @@ public class DAOContact {
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			lConnection = lDataSource.getConnection();
 
+			// On regarde si la combinaison email/nom existe
+			final PreparedStatement lPreparedStatementContact =
+
+					lConnection.prepareStatement("SELECT ID FROM contact WHERE LASTNAME = ? AND EMAIL = ?");
+
+			lPreparedStatementContact.setString(1, lastName);
+			lPreparedStatementContact.setString(2, email);
+
+			ResultSet rsContact = lPreparedStatementContact.executeQuery();
+			if (rsContact.next()) {
+				return "La combinaison email/nom existe déjà !";
+			}
+
 			// Contact
 			final PreparedStatement lPreparedStatementCreation =
 
@@ -151,7 +164,7 @@ public class DAOContact {
 			ResultSet rsContact = lPreparedStatementContact.executeQuery();
 
 			while (rsContact.next()) {
-				final Long id = rsContact.getLong("ID");
+				final int id = rsContact.getInt("ID");
 				final String lastName = rsContact.getString("LASTNAME");
 				final String firstName = rsContact.getString("FIRSTNAME");
 				final String email = rsContact.getString("EMAIL");
@@ -183,7 +196,7 @@ public class DAOContact {
 								"SELECT GROUPID, GROUPNAME FROM contactgroup INNER JOIN groupcomposition "
 										+ "ON groupcomposition.IDGROUP = contactgroup.GROUPID AND groupcomposition.IDCONTACT = ?");
 
-				lPreparedStatementGroup.setLong(1, id);
+				lPreparedStatementGroup.setInt(1, id);
 
 				ResultSet rsGroup = lPreparedStatementGroup.executeQuery();
 
@@ -192,8 +205,6 @@ public class DAOContact {
 					final String groupName = rsGroup.getString("GROUPNAME");
 
 					groups.add(new ContactGroup(groupId, groupName));
-
-					System.out.println("id groupe : " + groupId + ", name : " + groupName);
 				}
 
 				final List<PhoneNumber> phones = new LinkedList<PhoneNumber>();
@@ -203,21 +214,19 @@ public class DAOContact {
 						lConnection.prepareStatement(
 								"SELECT ID, PHONEKIND, PHONENUMBER FROM PHONENUMBER WHERE IDCONTACT = ?");
 
-				lPreparedStatementPhone.setLong(1, id);
+				lPreparedStatementPhone.setInt(1, id);
 
 				ResultSet rsPhone = lPreparedStatementPhone.executeQuery();
 
 				while (rsPhone.next()) {
-					final Long idPhone = rsPhone.getLong("ID");
+					final int idPhone = rsPhone.getInt("ID");
 					final String phoneKind = rsPhone.getString("PHONEKIND");
 					final String phoneNumber = rsPhone.getString("PHONENUMBER");
 
-					phones.add(new PhoneNumber(idPhone, id, phoneKind, phoneNumber));
-
-					System.out.println("id groupe : " + phoneKind + ", name : " + phoneNumber);
+					phones.add(new PhoneNumber(idPhone, id, phoneKind, phoneNumber, null));
 				}
 
-				contacts.add(new Contact(id, lastName, firstName, email, address, phones, groups));
+				contacts.add(new Contact(id, firstName, lastName, email, address, phones, groups));
 			}
 
 			display.setContacts(contacts);
@@ -302,10 +311,8 @@ public class DAOContact {
 		}
 	}
 
-	public String updateContact(final long id, final String firstName, final String lastName, final String email,
+	public String updateContact(final long id, final String lastName, final String firstName, final String email,
 			final String street, final String city, final String zip, final String country) {
-
-		System.out.println("Entre dans updateContact : " + id + " " + firstName + " " + street);
 
 		Connection lConnection = null;
 
@@ -363,7 +370,7 @@ public class DAOContact {
 				lPreparedStatementDeletionAddress.setLong(1, id);
 				lPreparedStatementDeletionAddress.executeUpdate();
 			}
-			
+
 			return null;
 
 		} catch (NamingException e) {

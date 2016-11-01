@@ -63,6 +63,7 @@
 			<tr>
 				<th><bean:message key="add.contact.form.phonekind" /></th>
 				<th><bean:message key="add.contact.form.phonenumber" /></th>
+				<th><bean:message key="contact.all.update" /></th>
 				<th><bean:message key="contact.all.delete" /></th>
 			</tr>
 		</thead>
@@ -72,6 +73,10 @@
 					<tr>
 						<td><bean:write name="phones" property="phoneKind" /></td>
 						<td><bean:write name="phones" property="phoneNumber" /></td>
+						<td><html:link action="UpdateP.do" paramId="id"
+							paramName="phones" paramProperty="id">
+							<bean:message key="contact.all.update" />
+						</html:link></td>
 
 						<!-- Voir juste en dessous ce que l'on a fait pour group pour plus d'explications.
 						Ici on veut juste récupérer l'id du group pour améliorer la gestion d'erreur dans la classe Action. -->

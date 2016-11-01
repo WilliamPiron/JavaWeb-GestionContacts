@@ -2,29 +2,31 @@ package org.lip6.struts.domain;
 
 public class PhoneNumber {
 
-	private long id;
-	private long idContact;
+	private int id;
+	private int idContact;
 	private String phoneKind;
 	private String phoneNumber;
+	private String errors;
 	
-	public PhoneNumber(long id, long idContact, String phoneKind, String phoneNumber){
+	public PhoneNumber(int id, int idContact, String phoneKind, String phoneNumber, String errors){
 		this.id = id;
 		this.idContact = idContact;
 		this.phoneKind = phoneKind;
 		this.phoneNumber = phoneNumber;
+		this.errors = errors;
 	}
 
 	/**
 	 * @return ID Returns ID
 	 */
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	
 	/**
 	 * @return ID Returns ID
 	 */
-	public long getIdContact() {
+	public int getIdContact() {
 		return idContact;
 	}
 
@@ -41,12 +43,19 @@ public class PhoneNumber {
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
+	
+	/**
+	 * @return Errors
+	 */
+	public String getErrors() {
+		return errors;
+	}
 
 	/**
 	 * @param l
 	 *            Sets the ID
 	 */
-	public void setId(long l) {
+	public void setId(int l) {
 		id = l;
 	}
 	
@@ -54,7 +63,7 @@ public class PhoneNumber {
 	 * @param l
 	 *            Sets the ID
 	 */
-	public void setIdContact(long l) {
+	public void setIdContact(int l) {
 		idContact = l;
 	}
 

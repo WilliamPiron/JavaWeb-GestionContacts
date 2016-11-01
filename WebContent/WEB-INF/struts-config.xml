@@ -12,6 +12,7 @@
     <form-bean name="AddPhoneValidationForm" type="org.lip6.struts.actionForm.AddPhoneValidationForm"/>
     <form-bean name="CompositionGroupContactValidationForm" type="org.lip6.struts.actionForm.CompositionGroupContactValidationForm"/>
     <form-bean name="UpdateContactValidationForm" type="org.lip6.struts.actionForm.UpdateContactValidationForm"/>
+    <form-bean name="UpdatePhoneValidationForm" type="org.lip6.struts.actionForm.UpdatePhoneValidationForm"/>
   </form-beans>
 
   <action-mappings>
@@ -21,6 +22,7 @@
 	<action path="/GroupCreation" forward="/pages/creationGroup.jsp" />
 	<action path="/GroupContactCreation" forward="/pages/compositionGroupContact.jsp" />
 	<action path="/UpdateC" forward="/pages/updateContact.jsp" />
+	<action path="/UpdateP" forward="/pages/updatePhone.jsp" />
 	<action path="/PhoneCreation" forward="/pages/creationPhone.jsp" />
   
     <action path="/AddContact" 
@@ -47,6 +49,15 @@
 				input="/pages/updateContact.jsp">
 				
 			<forward name="success" path="/pages/success.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/UpdatePhone"
+				type="org.lip6.struts.servletAction.UpdatePhoneAction"
+				name="UpdatePhoneValidationForm" scope="request" 
+				input="/pages/updatePhone.jsp">
+				
+			<forward name="success" path="/pages/displayContact.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     

@@ -23,7 +23,7 @@ public class UpdateContactValidationForm extends ActionForm {
 	private String city = null;
 	private String zip = null;
 	private String country = null;
-	
+
 	/**
 	 * @return ID Returns ID
 	 */
@@ -79,7 +79,7 @@ public class UpdateContactValidationForm extends ActionForm {
 	public String getCountry() {
 		return country;
 	}
-	
+
 	/**
 	 * @param l
 	 *            Sets the ID
@@ -145,21 +145,21 @@ public class UpdateContactValidationForm extends ActionForm {
 	}
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		
+
 		DAOContact daoContact = new DAOContact();
-		
+
 		final DisplayAllContact display = daoContact.displayContact(Integer.valueOf(request.getParameter("id")));
-		
-		/*On pré-remplie le formulaire d'update*/
-		
+
+		/* On pré-remplie le formulaire d'update */
+
 		// Contact
 		this.id = display.getContacts().get(0).getId();
-		this.firstName = display.getContacts().get(0).getFirstName();
 		this.lastName = display.getContacts().get(0).getLastName();
+		this.firstName = display.getContacts().get(0).getFirstName();
 		this.email = display.getContacts().get(0).getEmail();
 
 		// Address
-		if(display.getContacts().get(0).getAddress().isEmpty()) {
+		if (display.getContacts().get(0).getAddress().isEmpty()) {
 			this.street = null;
 			this.city = null;
 			this.zip = null;
@@ -174,7 +174,7 @@ public class UpdateContactValidationForm extends ActionForm {
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
-		
+
 		System.out.println("Entre dans validation form update contact");
 
 		// Contact
