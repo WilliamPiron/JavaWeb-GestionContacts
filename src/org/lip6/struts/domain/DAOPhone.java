@@ -11,9 +11,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DAOPhone {
-	
+
 	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/gestioncontacts";
-	
+
 	public String addPhone(long idContact, String phoneNumber, String phoneKind) {
 
 		System.out.println("Entre dans phone dao");
@@ -38,7 +38,8 @@ public class DAOPhone {
 
 			PreparedStatement lPreparedStatementGroupCreation =
 
-					lConnection.prepareStatement("INSERT INTO PHONENUMBER (IDCONTACT, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
+					lConnection.prepareStatement(
+							"INSERT INTO PHONENUMBER (IDCONTACT, PHONEKIND, PHONENUMBER) VALUES(?, ?, ?)");
 
 			lPreparedStatementGroupCreation.setLong(1, idContact);
 			lPreparedStatementGroupCreation.setString(2, phoneKind);
@@ -64,4 +65,41 @@ public class DAOPhone {
 		}
 	}
 
+	public String deletePhone(String phoneNumber) {
+
+		System.out.println("Entre dans phone delete");
+
+		Connection lConnection = null;
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			PreparedStatement lPreparedStatementPhoneDeletion =
+
+					lConnection.prepareStatement("DELETE FROM phonenumber WHERE PHONENUMBER = ?");
+
+			lPreparedStatementPhoneDeletion.setString(1, phoneNumber);
+			lPreparedStatementPhoneDeletion.executeUpdate();
+
+			return null;
+
+		} catch (NamingException e) {
+
+			return "NamingException : " + e.getMessage();
+
+		} catch (SQLException e) {
+
+			return "SQLException : " + e.getMessage();
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+
+				return "Erreur : " + e.getMessage();
+			}
+		}
+	}
 }

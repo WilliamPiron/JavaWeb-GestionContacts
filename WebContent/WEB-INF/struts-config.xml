@@ -97,6 +97,20 @@
 			<forward name="success" path="/pages/displayAllContact.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
+    
+    <action path="/PhoneDeletion"
+				type="org.lip6.struts.servletAction.DeletePhoneAction">
+				
+			<forward name="success" path="/pages/displayContact.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/GroupDeletion"
+				type="org.lip6.struts.servletAction.DeleteGroupAction">
+				
+			<forward name="success" path="/pages/displayContact.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
 	
   </action-mappings>
 

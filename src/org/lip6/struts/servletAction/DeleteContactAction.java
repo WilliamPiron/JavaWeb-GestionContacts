@@ -29,7 +29,6 @@ public class DeleteContactAction extends Action {
 			pRequest.setAttribute("LISTECONTACTS", display.getContacts());
 			return pMapping.findForward("success");
 		} else {
-			System.out.println("Erreur action");
 			final ActionMessages lErreurs = getErrors(pRequest);
 			final ActionMessage lActionMessage = new ActionMessage(display.getError(), false);
 			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
@@ -37,5 +36,4 @@ public class DeleteContactAction extends Action {
 			return pMapping.findForward("error");
 		}
 	}
-
 }
