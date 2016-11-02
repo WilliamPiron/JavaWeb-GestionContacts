@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.lip6.struts.actionForm.AddGroupValidationForm;
 import org.lip6.struts.domain.DAOGroup;
+import org.lip6.struts.domain.DisplayGroups;
 
 public class AddGroupAction extends Action {
 
@@ -22,16 +23,23 @@ public class AddGroupAction extends Action {
 
 		final long id = lForm.getId();
 		final String name = lForm.getName().trim().replaceAll(" +", " ");
-		
-		final DAOGroup lDAOGroup = new DAOGroup();
-		
-		final String lError = lDAOGroup.addGroup(id, name);
 
-		if (lError == null) {
-			// if no exception is raised, forward "success"
+		final DAOGroup lDAOGroup = new DAOGroup();
+		final String lError = lDAOGroup.addGroup(id, name);
+		final DAOGroup daoGroup = new DAOGroup();
+		final DisplayGroups displayGroups = daoGroup.displayAllGroups();
+
+		if (displayGroups.getError() == null && lError == null) {
+
+			pRequest.setAttribute("LISTEGROUPS", displayGroups.getGroups());
 			return pMapping.findForward("success");
+		} else if (lError == null) {
+			final ActionMessages lErreurs = getErrors(pRequest);
+			final ActionMessage lActionMessage = new ActionMessage(displayGroups.getError(), false);
+			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
+			saveErrors(pRequest, lErreurs);
+			return pMapping.findForward("error");
 		} else {
-			// If any exception, return the "error" forward
 			final ActionMessages lErreurs = getErrors(pRequest);
 			final ActionMessage lActionMessage = new ActionMessage(lError, false);
 			lErreurs.add(Globals.ERROR_KEY, lActionMessage);

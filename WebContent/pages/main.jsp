@@ -15,20 +15,12 @@
 		<bean:message key="main.page.menu" />
 	</h1>
 	<h4>
-		<a href="GroupCreation.do"><bean:message
-				key="main.addgroup.link" /></a>
-	</h4>
-	<h4>
-		<a href="GroupContactCreation.do"><bean:message
-				key="main.addcontactgroup.link" /></a>
+		<a href="GroupsDisplay.do"><bean:message
+				key="main.group" /></a>
 	</h4>
 	<h4>
 		<a href="AllContactDisplay.do"><bean:message
 				key="main.contactdisplay.link" /></a>
-	</h4>
-	<h4>
-		<a href="PhoneCreation.do"><bean:message
-				key="main.phone.link" /></a>
 	</h4>
 </body>
 </html:html>

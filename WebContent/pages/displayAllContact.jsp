@@ -33,7 +33,7 @@
 							paramName="contact" paramProperty="id">
 							<bean:message key="contact.display.link" />
 						</html:link></td>
-					<td><html:link action="ContactDeletion.do" paramId="id"
+					<td><html:link action="ContactDeletion.do?action=delete" paramId="id"
 							paramName="contact" paramProperty="id">
 							<bean:message key="main.deletecontact.link" />
 						</html:link></td>
@@ -72,7 +72,7 @@
 					<td><html:text property="city" maxlength="50" /></td>
 					<td><html:text property="zip" maxlength="25" /></td>
 					<td><html:text property="country" maxlength="50" /></td>
-					<td><html:submit>
+					<td><html:submit property="action" value="add">
 							<bean:message key="form.validation" />
 						</html:submit></td>
 					<td><html:reset>

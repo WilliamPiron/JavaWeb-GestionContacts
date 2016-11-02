@@ -6,19 +6,21 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.lip6.struts.domain.DAOGroup;
+import org.lip6.struts.domain.DisplayGroups;
 
-public class AddGroupValidationForm extends ActionForm {
+public class UpdateGroupValidationForm extends ActionForm {
 
 	private static final long serialVersionUID = 1L;
 
-	private long id = 0;
+	private long groupId = 0;
 	private String name = null;
-
+	
 	/**
 	 * @return ID Returns ID
 	 */
-	public long getId() {
-		return id;
+	public long getGroupId() {
+		return groupId;
 	}
 
 	/**
@@ -32,8 +34,8 @@ public class AddGroupValidationForm extends ActionForm {
 	 * @param l
 	 *            Sets the ID
 	 */
-	public void setId(long l) {
-		id = l;
+	public void setGroupId(long l) {
+		groupId = l;
 	}
 
 	/**
@@ -45,18 +47,20 @@ public class AddGroupValidationForm extends ActionForm {
 	}
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-
-		this.id = 0;
-		this.name = null;
+		
+		DAOGroup daoGroup = new DAOGroup();
+		
+		//On ne gère pas les erreurs avec la BDD !
+		final DisplayGroups display = daoGroup.displayGroup(Integer.valueOf(request.getParameter("groupId")));
+		
+		this.groupId = display.getGroups().get(0).getGroupId();
+		this.name = display.getGroups().get(0).getGroupName();
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
 
-		if (getId() < 1) {
-			errors.add("id", new ActionMessage("creation.id.error.required"));
-		}
 		if (getName().trim() == null || getName().trim().length() < 1) {
 			errors.add("name", new ActionMessage("creation.group.name.error.required"));
 		}

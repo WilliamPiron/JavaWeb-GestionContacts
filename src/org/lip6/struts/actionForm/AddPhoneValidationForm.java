@@ -6,6 +6,8 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.lip6.struts.domain.DAOContact;
+import org.lip6.struts.domain.DisplayAllContact;
 
 public class AddPhoneValidationForm extends ActionForm {
 
@@ -61,18 +63,16 @@ public class AddPhoneValidationForm extends ActionForm {
 	}
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-
-		this.id = 0;
 		this.phoneKind = null;
 		this.phoneNumber = null;
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+
+		System.out.println("Entre dans validation Phone creation " + id);
+
 		ActionErrors errors = new ActionErrors();
 
-		if (getId() < 1) {
-			errors.add("id", new ActionMessage("creation.id.error.required"));
-		}
 		if (getPhoneKind().trim() == null || getPhoneKind().trim().length() < 1) {
 			errors.add("phoneKind", new ActionMessage("creation.phonekind.error.required"));
 		}
@@ -81,6 +81,15 @@ public class AddPhoneValidationForm extends ActionForm {
 			errors.add("phoneNumber", new ActionMessage("creation.phonenumber.error.required"));
 		}
 
+		final DAOContact daoContact = new DAOContact();
+		final DisplayAllContact display = daoContact.displayContact((int) id);
+
+		// On ne gère pas les erreurs s'il y a un problème avec la BDD !
+		if (display.getError() == null) {
+			
+			request.setAttribute("CONTACT", display.getContacts());
+		}
+		
 		return errors;
 	}
 }

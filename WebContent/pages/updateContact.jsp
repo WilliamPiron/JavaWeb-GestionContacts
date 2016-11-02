@@ -64,7 +64,7 @@
 						maxlength="50" /></td>
 			</tr>
 			<tr>
-				<td align="right"><html:submit>
+				<td align="right"><html:submit property="action" value="update">
 						<bean:message key="form.validation" />
 					</html:submit></td>
 			</tr>

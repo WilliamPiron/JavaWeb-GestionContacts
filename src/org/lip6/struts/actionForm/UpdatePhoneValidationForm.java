@@ -65,7 +65,6 @@ public class UpdatePhoneValidationForm extends ActionForm {
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		
 		DAOPhone daoPhone = new DAOPhone();
-		
 		PhoneNumber phoneNumber = daoPhone.getPhone(Integer.valueOf(request.getParameter("id")));
 		
 		this.id = phoneNumber.getId();

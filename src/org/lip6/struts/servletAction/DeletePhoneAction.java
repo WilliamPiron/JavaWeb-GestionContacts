@@ -14,8 +14,8 @@ import org.lip6.struts.domain.DAOContact;
 import org.lip6.struts.domain.DAOPhone;
 import org.lip6.struts.domain.DisplayAllContact;
 
-public class DeletePhoneAction extends Action{
-	
+public class DeletePhoneAction extends Action {
+
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
 
@@ -24,10 +24,10 @@ public class DeletePhoneAction extends Action{
 
 		final DAOPhone daoPhone = new DAOPhone();
 		final DAOContact daoContact = new DAOContact();
-		
+
 		final String lError = daoPhone.deletePhone(phoneNumber);
 		final DisplayAllContact display = daoContact.displayContact(Integer.valueOf(id));
-		
+
 		if (display.getError() == null && lError == null) {
 
 			pRequest.setAttribute("CONTACT", display.getContacts());

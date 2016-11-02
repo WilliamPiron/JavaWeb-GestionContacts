@@ -10,27 +10,27 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.lip6.struts.domain.DAOContact;
-import org.lip6.struts.domain.DisplayAllContact;
+import org.lip6.struts.domain.DAOGroup;
+import org.lip6.struts.domain.DisplayGroups;
 
-public class DeleteContactAction extends Action {
+public class DisplayGroupsAction extends Action {
 
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
-
-		final String id = pRequest.getParameter("id");
-
-		final DAOContact daoContact = new DAOContact();
 		
-		final String lError = daoContact.deleteContact(Integer.valueOf(id));
-		final DisplayAllContact display = daoContact.displayAllContacts();
+		System.out.println("Entre dans DisplayGroupsAction");
 
-		if (lError == null) {
-			pRequest.setAttribute("LISTECONTACTS", display.getContacts());
+		final DAOGroup daoGroup = new DAOGroup();
+		final DisplayGroups displayGroups = daoGroup.displayAllGroups();
+
+		if (displayGroups.getError() == null) {
+
+			pRequest.setAttribute("LISTEGROUPS", displayGroups.getGroups());
 			return pMapping.findForward("success");
 		} else {
+
 			final ActionMessages lErreurs = getErrors(pRequest);
-			final ActionMessage lActionMessage = new ActionMessage(display.getError(), false);
+			final ActionMessage lActionMessage = new ActionMessage(displayGroups.getError(), false);
 			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
 			saveErrors(pRequest, lErreurs);
 			return pMapping.findForward("error");

@@ -13,6 +13,7 @@
     <form-bean name="CompositionGroupContactValidationForm" type="org.lip6.struts.actionForm.CompositionGroupContactValidationForm"/>
     <form-bean name="UpdateContactValidationForm" type="org.lip6.struts.actionForm.UpdateContactValidationForm"/>
     <form-bean name="UpdatePhoneValidationForm" type="org.lip6.struts.actionForm.UpdatePhoneValidationForm"/>
+    <form-bean name="UpdateGroupValidationForm" type="org.lip6.struts.actionForm.UpdateGroupValidationForm"/>
   </form-beans>
 
   <action-mappings>
@@ -20,35 +21,64 @@
     <action path="/Main" forward="/pages/main.jsp" />
 	<action path="/Connexion" forward="/pages/index.jsp" />
 	<action path="/GroupCreation" forward="/pages/creationGroup.jsp" />
-	<action path="/GroupContactCreation" forward="/pages/compositionGroupContact.jsp" />
 	<action path="/UpdateC" forward="/pages/updateContact.jsp" />
 	<action path="/UpdateP" forward="/pages/updatePhone.jsp" />
-	<action path="/PhoneCreation" forward="/pages/creationPhone.jsp" />
-  
-    <action path="/AddContact" 
-				type="org.lip6.struts.servletAction.AddContactAction"
-				name="AddContactValidationForm" scope="request" 
-				input="/pages/displayAllContact.jsp">
+	<action path="/UpdateG" forward="/pages/updateGroup.jsp" />
+	<action path="/AddCG" forward="/pages/compositionGroupContact.jsp" />
+	
+	<action path="/Login"
+				type="org.lip6.struts.servletAction.LoginAction"
+				name="LoginValidationForm" scope="request" 
+				input="/pages/index.jsp">
 				
-			<forward name="success" path="/pages/success.jsp" />
+			<forward name="connexion" path="/pages/main.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/AddContact" 
+				type="org.lip6.struts.servletAction.ContactAction"
+				name="AddContactValidationForm" scope="request" 
+				input="/pages/displayAllContact.jsp"
+				parameter="action">
+				
+			<forward name="success" path="/pages/displayAllContact.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
     <action path="/GroupAddContact"
 				type="org.lip6.struts.servletAction.GroupAddContactAction"
 				name="CompositionGroupContactValidationForm" scope="request" 
-				input="/pages/compositionGroupContact.jsp">
+				input="/pages/displayContact.jsp">
 				
-			<forward name="success" path="/pages/success.jsp" />
+			<forward name="success" path="/pages/displayContact.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/AddGroup"
+				type="org.lip6.struts.servletAction.AddGroupAction"
+				name="AddGroupValidationForm" scope="request" 
+				input="/pages/creationGroup.jsp">
+				
+			<forward name="success" path="/pages/displayGroups.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/AddPhone"
+				type="org.lip6.struts.servletAction.AddPhoneAction"
+				name="AddPhoneValidationForm" scope="request" 
+				input="/pages/displayContact.jsp">
+				
+			<forward name="success" path="/pages/displayContact.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
     <action path="/UpdateContact"
-				type="org.lip6.struts.servletAction.UpdateContactAction"
+				type="org.lip6.struts.servletAction.ContactAction"
 				name="UpdateContactValidationForm" scope="request" 
-				input="/pages/updateContact.jsp">
+				input="/pages/updateContact.jsp"
+				parameter="action">
 				
-			<forward name="success" path="/pages/success.jsp" />
+			<forward name="success" path="/pages/displayAllContact.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
@@ -61,30 +91,12 @@
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
-    <action path="/Login"
-				type="org.lip6.struts.servletAction.LoginAction"
-				name="LoginValidationForm" scope="request" 
-				input="/pages/index.jsp">
+    <action path="/UpdateGroup"
+				type="org.lip6.struts.servletAction.UpdateGroupAction"
+				name="UpdateGroupValidationForm" scope="request" 
+				input="/pages/updateGroup.jsp">
 				
-			<forward name="connexion" path="/pages/main.jsp" />
-			<forward name="error" path="/pages/error.jsp" />
-    </action>
-    
-    <action path="/AddGroup"
-				type="org.lip6.struts.servletAction.AddGroupAction"
-				name="AddGroupValidationForm" scope="request" 
-				input="/pages/creationGroup.jsp">
-				
-			<forward name="success" path="/pages/success.jsp" />
-			<forward name="error" path="/pages/error.jsp" />
-    </action>
-    
-    <action path="/AddPhone"
-				type="org.lip6.struts.servletAction.AddPhoneAction"
-				name="AddPhoneValidationForm" scope="request" 
-				input="/pages/creationPhone.jsp">
-				
-			<forward name="success" path="/pages/success.jsp" />
+			<forward name="success" path="/pages/displayGroups.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
@@ -102,8 +114,16 @@
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     
+    <action path="/GroupsDisplay"
+				type="org.lip6.struts.servletAction.DisplayGroupsAction">
+				
+			<forward name="success" path="/pages/displayGroups.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
     <action path="/ContactDeletion"
-				type="org.lip6.struts.servletAction.DeleteContactAction">
+				type="org.lip6.struts.servletAction.ContactAction"
+				parameter="action">
 				
 			<forward name="success" path="/pages/displayAllContact.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
@@ -123,6 +143,12 @@
 			<forward name="error" path="/pages/error.jsp" />
     </action>
 	
+	<action path="/GroupDestroy"
+				type="org.lip6.struts.servletAction.DestroyGroupAction">
+				
+			<forward name="success" path="/pages/displayGroups.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
   </action-mappings>
 
   <!-- ========== message file =========================== -->

@@ -5,14 +5,13 @@
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html:html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title><bean:message key="add.phone" /></title>
-<html:base />
+<title><bean:message key="group.all.update" /></title>
 </head>
 <body>
-	<html:form action="/AddPhone">
+<html:form action="/UpdateGroup">
 		<html:errors />
 		<table>
 			<tr>
@@ -20,20 +19,13 @@
 							key="form.info" /></font>
 			</tr>
 			<tr>
-				<td align="right"><bean:message key="add.phone.form.contact.id" /></td>
-				<td align="left"><html:text property="id" size="30"
-						maxlength="9" /></td>
+				<td align="right"><bean:message key="add.group.form.id" /></td>
+				<td align="left"><html:text property="groupId" size="30"
+						maxlength="9" readonly="true"/></td>
 			</tr>
 			<tr>
-				<td align="right"><bean:message
-						key="add.contact.form.phonekind" /></td>
-				<td align="left"><html:text property="phoneKind" size="30"
-						maxlength="50" /></td>
-			</tr>
-			<tr>
-				<td align="right"><bean:message
-						key="add.contact.form.phonenumber" /></td>
-				<td align="left"><html:text property="phoneNumber" size="30"
+				<td align="right"><bean:message key="add.group.form.name" /></td>
+				<td align="left"><html:text property="name" size="30"
 						maxlength="50" /></td>
 			</tr>
 			<tr>
@@ -49,4 +41,4 @@
 		</table>
 	</html:form>
 </body>
-</html:html>
+</html>

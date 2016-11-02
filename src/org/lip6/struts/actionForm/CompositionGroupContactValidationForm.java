@@ -6,19 +6,21 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.lip6.struts.domain.DAOContact;
+import org.lip6.struts.domain.DisplayAllContact;
 
 public class CompositionGroupContactValidationForm extends ActionForm {
 
 	private static final long serialVersionUID = 1L;
 
-	private long idContact = 0;
+	private long id = 0;
 	private long idGroup = 0;
 
 	/**
-	 * @return idContact
+	 * @return id du contact
 	 */
-	public long getIdContact() {
-		return idContact;
+	public long getId() {
+		return id;
 	}
 
 	/**
@@ -30,10 +32,10 @@ public class CompositionGroupContactValidationForm extends ActionForm {
 
 	/**
 	 * @param l
-	 *            Sets the idContact
+	 *            Sets the contact id
 	 */
 	public void setIdContact(long l) {
-		idContact = l;
+		id = l;
 	}
 
 	/**
@@ -46,20 +48,28 @@ public class CompositionGroupContactValidationForm extends ActionForm {
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 
-		this.idContact = 0;
 		this.idGroup = 0;
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+		
+		System.out.println("Entre dans valide group contact : " + id);
 
 		ActionErrors errors = new ActionErrors();
-
-		if (getIdContact() < 1) {
-			errors.add("idContact", new ActionMessage("creation.id.error.required"));
-		}
+		
 		if (getIdGroup() < 1) {
 			errors.add("idGroup", new ActionMessage("creation.id.error.required"));
 		}
+		
+		final DAOContact daoContact = new DAOContact();
+		final DisplayAllContact display = daoContact.displayContact((int) id);
+
+		// On ne gère pas les erreurs s'il y a un problème avec la BDD !
+		if (display.getError() == null) {
+			
+			request.setAttribute("CONTACT", display.getContacts());
+		}
+		
 		return errors;
 	}
 }

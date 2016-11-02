@@ -20,6 +20,7 @@
 <body>
 
 	<!-- On divise les infos d'un contact en 3 tableaux : contact + adresse, phones et groups -->
+	<!-- Tableau contact -->
 	<table border="1">
 		<thead>
 			<tr>
@@ -58,6 +59,7 @@
 		</tbody>
 	</table>
 
+	<!-- Tableau phone -->
 	<table border="1">
 		<thead>
 			<tr>
@@ -74,9 +76,9 @@
 						<td><bean:write name="phones" property="phoneKind" /></td>
 						<td><bean:write name="phones" property="phoneNumber" /></td>
 						<td><html:link action="UpdateP.do" paramId="id"
-							paramName="phones" paramProperty="id">
-							<bean:message key="contact.all.update" />
-						</html:link></td>
+								paramName="phones" paramProperty="id">
+								<bean:message key="contact.all.update" />
+							</html:link></td>
 
 						<!-- Voir juste en dessous ce que l'on a fait pour group pour plus d'explications.
 						Ici on veut juste récupérer l'id du group pour améliorer la gestion d'erreur dans la classe Action. -->
@@ -100,11 +102,43 @@
 		</tbody>
 	</table>
 
+	<html:form action="/AddPhone">
+		<html:errors />
+		<table border="1">
+			<thead>
+				<tr>
+					<th><bean:message key="add.phone.form.contact.id" /></th>
+					<th><bean:message key="add.contact.form.phonekind" /></th>
+					<th><bean:message key="add.contact.form.phonenumber" /></th>
+					<th><bean:message key="form.validation" /></th>
+					<th><bean:message key="form.reset" /></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td><html:text name="contact" property="id" maxlength="9"
+							readonly="true" /></td>
+					<td><html:text property="phoneKind" maxlength="50" /></td>
+					<td><html:text property="phoneNumber" maxlength="50" /></td>
+					<td><html:submit>
+							<bean:message key="form.validation" />
+						</html:submit></td>
+					<td><html:reset>
+							<bean:message key="form.reset" />
+						</html:reset></td>
+				</tr>
+			</tbody>
+		</table>
+	</html:form>
+
+	<!-- Tableau groups -->
 	<table border="1">
 		<thead>
 			<tr>
 				<th><bean:message key="add.contact.form.groupname" /></th>
 				<th><bean:message key="contact.all.delete" /></th>
+				<th><bean:message key="main.add" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -129,12 +163,16 @@
 								paramProperty="groupName">
 								<bean:message key="contact.all.delete" />
 							</html:link>
-						</td>
+						<td><html:link action="AddCG.do" paramId="id"
+								paramName="contact" paramProperty="id">
+								<bean:message key="main.add" />
+							</html:link></td>
 					</tr>
 				</logic:iterate>
 			</logic:iterate>
 		</tbody>
 	</table>
+
 	<h4>
 		<a href="Main.do"><bean:message key="main.redirection" /></a>
 	</h4>

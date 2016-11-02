@@ -13,21 +13,20 @@ import org.apache.struts.action.ActionMessages;
 import org.lip6.struts.domain.DAOContact;
 import org.lip6.struts.domain.DisplayAllContact;
 
-public class DisplayAllContactAction extends Action{
-	
+public class DisplayAllContactAction extends Action {
+
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
 
 		final DAOContact daoContact = new DAOContact();
 		final DisplayAllContact display = daoContact.displayAllContacts();
-		
-		
-		if(display.getError() == null) {
-			System.out.println("Envoi des données");
+
+		if (display.getError() == null) {
+
 			pRequest.setAttribute("LISTECONTACTS", display.getContacts());
 			return pMapping.findForward("success");
 		} else {
-			System.out.println("Erreur action");
+
 			final ActionMessages lErreurs = getErrors(pRequest);
 			final ActionMessage lActionMessage = new ActionMessage(display.getError(), false);
 			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
