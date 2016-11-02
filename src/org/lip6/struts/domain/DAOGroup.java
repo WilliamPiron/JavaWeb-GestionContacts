@@ -24,6 +24,18 @@ public class DAOGroup {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			lConnection = lDataSource.getConnection();
+			
+			// On regarde si le nom du groupe existe déjà
+			final PreparedStatement lPreparedStatementGoupName =
+
+					lConnection.prepareStatement("SELECT GROUPNAME FROM contactgroup WHERE GROUPNAME = ?");
+
+			lPreparedStatementGoupName.setString(1, name);
+			ResultSet rsGroup = lPreparedStatementGoupName.executeQuery();
+			
+			if (rsGroup.next()) {
+				return "Le nom du groupe existe déjà !";
+			}
 
 			PreparedStatement lPreparedStatementGroupCreation =
 
@@ -110,38 +122,38 @@ public class DAOGroup {
 			}
 		}
 	}
-	
+
 	public String deleteGroup(int id, String groupName) {
 
 		System.out.println("Entre dans group delete : " + id + " : " + groupName);
-		
+
 		Connection lConnection = null;
 
 		try {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			lConnection = lDataSource.getConnection();
-			
+
 			System.out.println(11111);
-			
+
 			PreparedStatement lPreparedStatementGetGroupId =
 
 					lConnection.prepareStatement("SELECT GROUPID FROM contactgroup WHERE GROUPNAME = ?");
-			
+
 			lPreparedStatementGetGroupId.setString(1, groupName);
 			ResultSet rsGroup = lPreparedStatementGetGroupId.executeQuery();
-			
+
 			int idGroup = 0;
-			while (rsGroup.next()) { 
+			while (rsGroup.next()) {
 				idGroup = rsGroup.getInt("GROUPID");
 			}
-			
+
 			System.out.println("Id contact : " + id + " Id groupe : " + idGroup);
 
 			PreparedStatement lPreparedStatementGroupDeletion =
 
 					lConnection.prepareStatement("DELETE FROM groupcomposition WHERE IDCONTACT = ? AND IDGROUP = ?");
-			
+
 			lPreparedStatementGroupDeletion.setInt(1, id);
 			lPreparedStatementGroupDeletion.setInt(2, idGroup);
 			lPreparedStatementGroupDeletion.executeUpdate();
@@ -153,14 +165,14 @@ public class DAOGroup {
 			return "NamingException : " + e.getMessage();
 
 		} catch (SQLException e) {
-			
+
 			return "SQLException : " + e.getMessage();
 		} finally {
 			try {
 				if (lConnection != null)
 					lConnection.close();
 			} catch (SQLException e) {
-				
+
 				return "Erreur : " + e.getMessage();
 			}
 		}
