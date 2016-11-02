@@ -138,7 +138,10 @@
 			<tr>
 				<th><bean:message key="add.contact.form.groupname" /></th>
 				<th><bean:message key="contact.all.delete" /></th>
-				<th><bean:message key="main.add" /></th>
+				<th><html:link action="AddCG.do" paramId="id"
+						paramName="contact" paramProperty="id">
+						<bean:message key="main.add" />
+					</html:link></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -172,7 +175,6 @@
 			</logic:iterate>
 		</tbody>
 	</table>
-
 	<h4>
 		<a href="Main.do"><bean:message key="main.redirection" /></a>
 	</h4>

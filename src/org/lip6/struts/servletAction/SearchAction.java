@@ -10,43 +10,35 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.lip6.struts.actionForm.SearchValidationForm;
 import org.lip6.struts.domain.DAOContact;
-import org.lip6.struts.domain.DAOPhone;
 import org.lip6.struts.domain.DisplayAllContact;
 
-public class DeletePhoneAction extends Action {
-
+public class SearchAction extends Action {
+	
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
+		
+		System.out.println("Entre dans action search");
 
-		final String phoneNumber = pRequest.getParameter("phoneNumber");
-		final String id = (String) pRequest.getParameter("id");
+		final SearchValidationForm lForm = (SearchValidationForm) pForm;
 
-		final DAOPhone daoPhone = new DAOPhone();
+		final String word = lForm.getWord().trim().replaceAll(" +", " ");
+		
 		final DAOContact daoContact = new DAOContact();
+		final DisplayAllContact display = daoContact.searchContact(word);
 
-		final String lError = daoPhone.deletePhone(phoneNumber);
-		final DisplayAllContact display = daoContact.displayContact(Integer.valueOf(id));
-
-		if (display.getError() == null && lError == null) {
-
+		if (display.getError() == null) {
+			
+			System.out.println("Envoi données action search");
 			pRequest.setAttribute("CONTACT", display.getContacts());
-			if (!display.getContacts().get(0).getAddress().isEmpty()) {
-				pRequest.setAttribute("ADDRESS", display.getContacts().get(0).getAddress());
-			}
 			return pMapping.findForward("success");
-		} else if (lError == null) {
+		} else {
 			final ActionMessages lErreurs = getErrors(pRequest);
 			final ActionMessage lActionMessage = new ActionMessage(display.getError(), false);
 			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
 			saveErrors(pRequest, lErreurs);
 			return pMapping.findForward("error");
-		} else {
-			final ActionMessages lErreurs = getErrors(pRequest);
-			final ActionMessage lActionMessage = new ActionMessage(lError, false);
-			lErreurs.add(Globals.ERROR_KEY, lActionMessage);
-			saveErrors(pRequest, lErreurs);
-			return pMapping.findForward("error");
-		}
+		} 
 	}
 }

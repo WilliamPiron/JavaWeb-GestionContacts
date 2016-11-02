@@ -390,4 +390,63 @@ public class DAOContact {
 			}
 		}
 	}
+
+	public DisplayAllContact searchContact(String word) {
+
+		System.out.println("Entre dans search contact DAO");
+
+		final DisplayAllContact display = new DisplayAllContact();
+		Connection lConnection = null;
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			final List<Contact> contacts = new LinkedList<Contact>();
+
+			word = word.replace("!", "!!").replace("%", "!%").replace("_", "!_").replace("[", "![");
+
+			final PreparedStatement lPreparedStatementContact =
+
+					lConnection.prepareStatement(
+							"SELECT ID, LASTNAME, FIRSTNAME, EMAIL FROM contact WHERE ID LIKE ? OR LASTNAME LIKE ? OR FIRSTNAME LIKE ? OR EMAIL LIKE ?");
+
+			lPreparedStatementContact.setString(1, "%" + word + "%");
+			lPreparedStatementContact.setString(2, "%" + word + "%");
+			lPreparedStatementContact.setString(3, "%" + word + "%");
+			lPreparedStatementContact.setString(4, "%" + word + "%");
+			ResultSet rsContact = lPreparedStatementContact.executeQuery();
+
+			while (rsContact.next()) {
+				final Long id = rsContact.getLong("ID");
+				final String lastName = rsContact.getString("LASTNAME");
+				final String firstName = rsContact.getString("FIRSTNAME");
+				final String email = rsContact.getString("EMAIL");
+
+				contacts.add(new Contact(id, lastName, firstName, email, null, null, null));
+			}
+
+			display.setContacts(contacts);
+
+		} catch (NamingException e) {
+
+			System.out.println(e.getMessage());
+			display.setError("NamingException : " + e.getMessage());
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+			display.setError("SQLException : " + e.getMessage());
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				display.setError("Erreur : " + e.getMessage());
+			}
+		}
+		return display;
+	}
 }

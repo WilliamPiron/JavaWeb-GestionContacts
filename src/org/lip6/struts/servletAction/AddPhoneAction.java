@@ -33,11 +33,16 @@ public class AddPhoneAction extends Action {
 		
 		final String lError = lDAOPhone.addPhone(id, phoneNumber, phoneKind);
 		final DisplayAllContact display = daoContact.displayContact((int) id);
+		
+		
 
 		if (display.getError() == null && lError == null) {
 			
 			System.out.println("Envoi CONTACT phone action");
 			pRequest.setAttribute("CONTACT", display.getContacts());
+			if (!display.getContacts().get(0).getAddress().isEmpty()) {
+				pRequest.setAttribute("ADDRESS", display.getContacts().get(0).getAddress());
+			}
 			return pMapping.findForward("success");
 		} else if (lError == null) {
 			final ActionMessages lErreurs = getErrors(pRequest);

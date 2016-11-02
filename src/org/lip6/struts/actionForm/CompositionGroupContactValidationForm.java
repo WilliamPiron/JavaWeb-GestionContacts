@@ -48,12 +48,13 @@ public class CompositionGroupContactValidationForm extends ActionForm {
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 
+		this.id = Long.parseLong(request.getParameter("id"));
 		this.idGroup = 0;
 	}
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		
-		System.out.println("Entre dans valide group contact : " + id);
+		System.out.println("Entre dans valide group contact : ");
 
 		ActionErrors errors = new ActionErrors();
 		

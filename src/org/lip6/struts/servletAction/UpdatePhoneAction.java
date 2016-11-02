@@ -38,6 +38,9 @@ public class UpdatePhoneAction extends Action {
 		if (display.getError() == null && lError == null) {
 
 			pRequest.setAttribute("CONTACT", display.getContacts());
+			if (!display.getContacts().get(0).getAddress().isEmpty()) {
+				pRequest.setAttribute("ADDRESS", display.getContacts().get(0).getAddress());
+			}
 			return pMapping.findForward("success");
 		} else if (lError == null) {
 			final ActionMessages lErreurs = getErrors(pRequest);

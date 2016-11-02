@@ -25,15 +25,16 @@ public class DAOPhone {
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			lConnection = lDataSource.getConnection();
 
-			PreparedStatement lPreparedStatementContactExist =
+			//On regarde si le numéro existe déjà
+			PreparedStatement lPreparedStatementPhoneExist =
 
-					lConnection.prepareStatement("SELECT ID FROM contact WHERE id=?");
+					lConnection.prepareStatement("SELECT PHONEKIND FROM phonenumber WHERE PHONENUMBER = ?");
 
-			lPreparedStatementContactExist.setLong(1, idContact);
-			ResultSet rsContact = lPreparedStatementContactExist.executeQuery();
+			lPreparedStatementPhoneExist.setString(1, phoneNumber);
+			ResultSet rsPhone = lPreparedStatementPhoneExist.executeQuery();
 
-			if (!rsContact.next()) {
-				return "L'id du contact n'existe pas !";
+			if (rsPhone.next()) {
+				return "Le numéro existe déjà !";
 			}
 
 			PreparedStatement lPreparedStatementGroupCreation =
@@ -111,6 +112,18 @@ public class DAOPhone {
 			final Context lContext = new InitialContext();
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			lConnection = lDataSource.getConnection();
+			
+			//On regarde si le numéro existe déjà
+			PreparedStatement lPreparedStatementPhoneExist =
+
+					lConnection.prepareStatement("SELECT PHONEKIND FROM phonenumber WHERE PHONENUMBER = ?");
+
+			lPreparedStatementPhoneExist.setString(1, phoneNumber);
+			ResultSet rsPhone = lPreparedStatementPhoneExist.executeQuery();
+
+			if (rsPhone.next()) {
+				return "Le numéro existe déjà !";
+			}
 
 			PreparedStatement lPreparedStatementUpdate =
 

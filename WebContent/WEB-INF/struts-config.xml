@@ -14,6 +14,7 @@
     <form-bean name="UpdateContactValidationForm" type="org.lip6.struts.actionForm.UpdateContactValidationForm"/>
     <form-bean name="UpdatePhoneValidationForm" type="org.lip6.struts.actionForm.UpdatePhoneValidationForm"/>
     <form-bean name="UpdateGroupValidationForm" type="org.lip6.struts.actionForm.UpdateGroupValidationForm"/>
+     <form-bean name="SearchValidationForm" type="org.lip6.struts.actionForm.SearchValidationForm"/>
   </form-beans>
 
   <action-mappings>
@@ -25,6 +26,7 @@
 	<action path="/UpdateP" forward="/pages/updatePhone.jsp" />
 	<action path="/UpdateG" forward="/pages/updateGroup.jsp" />
 	<action path="/AddCG" forward="/pages/compositionGroupContact.jsp" />
+	<action path="/Search" forward="/pages/search.jsp" />
 	
 	<action path="/Login"
 				type="org.lip6.struts.servletAction.LoginAction"
@@ -32,6 +34,16 @@
 				input="/pages/index.jsp">
 				
 			<forward name="connexion" path="/pages/main.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+    </action>
+    
+    <action path="/SearchAll" 
+				type="org.lip6.struts.servletAction.SearchAction"
+				name="SearchValidationForm" scope="request" 
+				input="/pages/search.jsp"
+				parameter="action">
+				
+			<forward name="success" path="/pages/searchResult.jsp" />
 			<forward name="error" path="/pages/error.jsp" />
     </action>
     

@@ -22,5 +22,9 @@
 		<a href="AllContactDisplay.do"><bean:message
 				key="main.contactdisplay.link" /></a>
 	</h4>
+	<h4>
+		<a href="Search.do"><bean:message
+				key="main.search" /></a>
+	</h4>
 </body>
 </html:html>
