@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -200,5 +202,64 @@ public class DAOPhone {
 				return (new PhoneNumber(0, 0, null, null, "Erreur : " + e.getMessage()));
 			}
 		}
+	}
+	
+	public List<PhoneNumber> searchPhone(String word) {
+
+		System.out.println("Entre dans search phone DAO");
+
+		final DisplayAllContact display = new DisplayAllContact();
+		Connection lConnection = null;
+		
+		final List<PhoneNumber> phones = new LinkedList<PhoneNumber>();
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			word = word.replace("!", "!!").replace("%", "!%").replace("_", "!_").replace("[", "![");
+
+			final PreparedStatement lPreparedStatementPhone =
+
+					lConnection.prepareStatement(
+							"SELECT ID, IDCONTACT, PHONEKIND, PHONENUMBER FROM phonenumber WHERE ID LIKE ? OR IDCONTACT LIKE ? OR PHONEKIND LIKE ? OR PHONENUMBER LIKE ?");
+
+			lPreparedStatementPhone.setString(1, "%" + word + "%");
+			lPreparedStatementPhone.setString(2, "%" + word + "%");
+			lPreparedStatementPhone.setString(3, "%" + word + "%");
+			lPreparedStatementPhone.setString(4, "%" + word + "%");
+			ResultSet rsPhone = lPreparedStatementPhone.executeQuery();
+
+			while (rsPhone.next()) {
+
+				final int id = rsPhone.getInt("ID");
+				final int idContact = rsPhone.getInt("IDCONTACT");
+				final String phoneKind = rsPhone.getString("PHONEKIND");
+				final String phoneNumber = rsPhone.getString("PHONENUMBER");
+
+				phones.add(new PhoneNumber(id, idContact, phoneKind, phoneNumber, null));
+			}
+
+		} catch (NamingException e) {
+
+			System.out.println(e.getMessage());
+			phones.add(new PhoneNumber(0, 0, null, null, "NamingException : " + e.getMessage()));
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+			display.setError("SQLException : " + e.getMessage());
+			phones.add(new PhoneNumber(0, 0, null, null, "SQLException : " + e.getMessage()));
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				phones.add(new PhoneNumber(0, 0, null, null, "Erreur : " + e.getMessage()));
+			}
+		}
+		return phones;
 	}
 }

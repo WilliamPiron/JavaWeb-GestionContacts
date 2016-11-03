@@ -31,5 +31,26 @@
 			</logic:iterate>
 		</tbody>
 	</table>
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th><bean:message key="add.group.form.id" /></th>
+				<th><bean:message key="add.contact.form.id" /></th>
+				<th><bean:message key="add.contact.form.phonekind" /></th>
+				<th><bean:message key="add.contact.form.phonenumber" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<logic:iterate name="PHONE" id="phone">
+				<tr>
+					<td><bean:write name="phone" property="id" /></td>
+					<td><bean:write name="phone" property="idContact" /></td>
+					<td><bean:write name="phone" property="phoneKind" /></td>
+					<td><bean:write name="phone" property="phoneNumber" /></td>
+				</tr>
+			</logic:iterate>
+		</tbody>
+	</table>
 </body>
 </html>

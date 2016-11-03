@@ -419,6 +419,7 @@ public class DAOContact {
 			ResultSet rsContact = lPreparedStatementContact.executeQuery();
 
 			while (rsContact.next()) {
+
 				final Long id = rsContact.getLong("ID");
 				final String lastName = rsContact.getString("LASTNAME");
 				final String firstName = rsContact.getString("FIRSTNAME");
