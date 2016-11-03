@@ -76,8 +76,10 @@
 		</table>
 	</html:form>
 
-	<h4>
-		<a href="Main.do"><bean:message key="main.redirection" /></a>
-	</h4>
+	<div class="text-center">
+		<h4>
+			<a href="Main.do"><bean:message key="main.redirection" /></a>
+		</h4>
+	</div>
 </body>
 </html>

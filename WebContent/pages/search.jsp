@@ -17,12 +17,12 @@
 <title><bean:message key="main.search" /></title>
 </head>
 <body>
-	<h2>
+	<h2 class="text-center">
 		<bean:message key="main.search.info" />
 	</h2>
 	<html:form action="/SearchAll">
 		<html:errors />
-		<table border="1">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><bean:message key="main.search" /></th>
@@ -44,5 +44,12 @@
 			</tbody>
 		</table>
 	</html:form>
+	
+	<div class="text-center">
+		<h4>
+			<a href="Main.do"><bean:message key="main.redirection" /></a>
+		</h4>
+	</div>
+	
 </body>
 </html>

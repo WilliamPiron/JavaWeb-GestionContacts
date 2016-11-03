@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 02 Novembre 2016 à 20:02
+-- Généré le :  Jeu 03 Novembre 2016 à 13:40
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -39,7 +39,8 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`id`, `street`, `city`, `zip`, `country`) VALUES
-(3, 'oip', 'ville', '92000', 'pays');
+(1, '21 xftyrj drxyfjk', 'ytgukdtu', '0745366', 'fyghjdgfyh'),
+(2, 'xfdg', 'dgtn', '0574', 'fghyj');
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,6 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `lastname`, `firstname`, `email`) VALUES
-(3, 'pup', 'poi', 'poi@poi.fr'),
 (2, 'iopgiyu', 'fyilf', 'ilfy@free.fr'),
 (1, 'Zouz', 'Jimmy', 'billy.zouz@gmail.com');
 
@@ -79,7 +79,9 @@ CREATE TABLE `contactgroup` (
 --
 
 INSERT INTO `contactgroup` (`groupId`, `groupName`) VALUES
-(1, 'PHP');
+(1, 'Java'),
+(2, 'PHP'),
+(3, 'JEE');
 
 -- --------------------------------------------------------
 
@@ -97,7 +99,8 @@ CREATE TABLE `groupcomposition` (
 --
 
 INSERT INTO `groupcomposition` (`idcontact`, `idgroup`) VALUES
-(1, 1);
+(1, 1),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -118,11 +121,7 @@ CREATE TABLE `phonenumber` (
 
 INSERT INTO `phonenumber` (`id`, `idContact`, `phoneKind`, `phoneNumber`) VALUES
 (20, 1, 'ghilfy', '405237'),
-(26, 3, 'gjkilg', '045345'),
-(33, 3, 'hjuilgu', '0746746'),
-(37, 2, 'ghilg', '0453274'),
-(38, 2, 'cguck', '0453'),
-(39, 1, 'hiufv', '078567');
+(37, 2, 'ghilg', '0458343');
 
 --
 -- Index pour les tables exportées
@@ -166,7 +165,7 @@ ALTER TABLE `phonenumber`
 -- AUTO_INCREMENT pour la table `phonenumber`
 --
 ALTER TABLE `phonenumber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

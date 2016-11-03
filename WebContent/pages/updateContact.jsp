@@ -20,7 +20,7 @@
 <body>
 	<html:form action="/UpdateContact">
 		<html:errors />
-		<table>
+		<table border="1">
 			<tr>
 				<td align="center" colspan="2"><font size="4"><bean:message
 							key="form.info" /></font>

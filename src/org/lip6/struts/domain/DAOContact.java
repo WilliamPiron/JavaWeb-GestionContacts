@@ -342,7 +342,12 @@ public class DAOContact {
 
 			ResultSet rsContact = lPreparedStatementContact.executeQuery();
 			if (rsContact.next()) {
-				return "La combinaison email/nom existe déjà !";
+				
+				//On regarde si le contact à update est le même contact (pour éviter la combinaison email/nom existe déjà si on ne change rien)
+				final int idContact = rsContact.getInt("ID");
+				if(idContact != id) {
+					return "La combinaison email/nom existe déjà !";
+				}
 			}
 
 			// On regarde si le email existe
@@ -353,7 +358,11 @@ public class DAOContact {
 			lPreparedStatementEmail.setString(1, email);
 			ResultSet rsEmail = lPreparedStatementEmail.executeQuery();
 			if (rsEmail.next()) {
-				return "L'email existe déjà !";
+				
+				final int idContact = rsEmail.getInt("ID");
+				if(idContact != id) {
+					return "L'email existe déjà !";
+				}
 			}
 
 			PreparedStatement lPreparedStatementUpdate =

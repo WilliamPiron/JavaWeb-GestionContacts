@@ -205,7 +205,7 @@ public class AddContactValidationForm extends ActionForm {
 			if (getCity().trim() == null || getCity().trim().length() < 1) {
 				errors.add("city", new ActionMessage("creation.city.error.required"));
 			}
-			if (getZip().trim() == null || getZip().trim().length() < 1 || !getZip().matches("[0-9]+")) {
+			if (Integer.parseInt(getZip()) < 1 || getZip().trim() == null || getZip().trim().length() < 1 || !getZip().matches("[0-9]+")) {
 				errors.add("zip", new ActionMessage("creation.zip.error.required"));
 			}
 			if (getCountry().trim() == null || getCountry().trim().length() < 1) {

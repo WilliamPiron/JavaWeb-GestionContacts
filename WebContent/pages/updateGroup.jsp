@@ -17,34 +17,44 @@
 <title><bean:message key="group.all.update" /></title>
 </head>
 <body>
+	<h1 class="text-center">
+		<bean:message key="form.info" />
+	</h1>
+
+	<br>
+	<br>
 	<html:form action="/UpdateGroup">
 		<html:errors />
-		<table>
-			<tr>
-				<td align="center" colspan="2"><font size="4"><bean:message
-							key="form.info" /></font>
-			</tr>
-			<tr>
-				<td align="right"><bean:message key="add.group.form.id" /></td>
-				<td align="left"><html:text property="groupId" size="30"
-						maxlength="9" readonly="true" /></td>
-			</tr>
-			<tr>
-				<td align="right"><bean:message key="add.group.form.name" /></td>
-				<td align="left"><html:text property="name" size="30"
-						maxlength="50" /></td>
-			</tr>
-			<tr>
-				<td align="right"><html:submit>
-						<bean:message key="form.validation" />
-					</html:submit></td>
-			</tr>
-			<tr>
-				<td align="right"><html:reset>
-						<bean:message key="form.reset" />
-					</html:reset></td>
-			</tr>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><bean:message key="add.group.form.id" /></th>
+					<th><bean:message key="add.group.form.name" /></th>
+					<th><bean:message key="form.validation" /></th>
+					<th><bean:message key="form.reset" /></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><html:text property="groupId" maxlength="9"
+							readonly="true" /></td>
+					<td><html:text property="name" maxlength="50" /></td>
+					<td align="right"><html:submit>
+							<bean:message key="form.validation" />
+						</html:submit></td>
+					<td align="right"><html:reset>
+							<bean:message key="form.reset" />
+						</html:reset></td>
+				</tr>
+			</tbody>
 		</table>
 	</html:form>
+
+	<div class="text-center">
+		<h4>
+			<a href="Main.do"><bean:message key="main.redirection" /></a>
+		</h4>
+	</div>
 </body>
 </html>

@@ -351,13 +351,17 @@ public class DAOGroup {
 			// On regarde si le nom du groupe existe déjà
 			final PreparedStatement lPreparedStatementGoupName =
 
-					lConnection.prepareStatement("SELECT GROUPNAME FROM contactgroup WHERE GROUPNAME = ?");
+					lConnection.prepareStatement("SELECT GROUPID FROM contactgroup WHERE GROUPNAME = ?");
 
 			lPreparedStatementGoupName.setString(1, groupName);
 			ResultSet rsGroup = lPreparedStatementGoupName.executeQuery();
-
+			
 			if (rsGroup.next()) {
-				return "Le nom du groupe existe déjà !";
+				
+				final int idGroup = rsGroup.getInt("GROUPID");
+				if (idGroup != id) {
+					return "Le nom du groupe existe déjà !";
+				}
 			}
 
 			PreparedStatement lPreparedStatementUpdate =
@@ -387,13 +391,13 @@ public class DAOGroup {
 			}
 		}
 	}
-	
+
 	public List<ContactGroup> searchGroup(String word) {
 
 		System.out.println("Entre dans search group DAO");
-		
+
 		Connection lConnection = null;
-		
+
 		final List<ContactGroup> contactGroup = new LinkedList<ContactGroup>();
 
 		try {

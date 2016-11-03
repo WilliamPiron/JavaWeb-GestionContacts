@@ -118,13 +118,17 @@ public class DAOPhone {
 			//On regarde si le numéro existe déjà
 			PreparedStatement lPreparedStatementPhoneExist =
 
-					lConnection.prepareStatement("SELECT PHONEKIND FROM phonenumber WHERE PHONENUMBER = ?");
+					lConnection.prepareStatement("SELECT ID FROM phonenumber WHERE PHONENUMBER = ?");
 
 			lPreparedStatementPhoneExist.setString(1, phoneNumber);
 			ResultSet rsPhone = lPreparedStatementPhoneExist.executeQuery();
 
 			if (rsPhone.next()) {
-				return "Le numéro existe déjà !";
+				
+				final int id = rsPhone.getInt("ID");
+				if(id != idPhone) {
+					return "Le numéro existe déjà !";
+				}
 			}
 
 			PreparedStatement lPreparedStatementUpdate =

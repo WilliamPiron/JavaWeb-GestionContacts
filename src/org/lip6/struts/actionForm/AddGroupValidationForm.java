@@ -6,9 +6,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
-import org.lip6.struts.domain.DAOContact;
 import org.lip6.struts.domain.DAOGroup;
-import org.lip6.struts.domain.DisplayAllContact;
 import org.lip6.struts.domain.DisplayGroups;
 
 public class AddGroupValidationForm extends ActionForm {

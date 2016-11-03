@@ -76,7 +76,7 @@ public class AddPhoneValidationForm extends ActionForm {
 		if (getPhoneKind().trim() == null || getPhoneKind().trim().length() < 1) {
 			errors.add("phoneKind", new ActionMessage("creation.phonekind.error.required"));
 		}
-		if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 1
+		if (getPhoneNumber().trim() == null || getPhoneNumber().trim().length() < 4
 				|| !getPhoneNumber().matches("[0-9]+")) {
 			errors.add("phoneNumber", new ActionMessage("creation.phonenumber.error.required"));
 		}
