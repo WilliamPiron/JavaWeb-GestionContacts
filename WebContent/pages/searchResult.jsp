@@ -52,5 +52,22 @@
 			</logic:iterate>
 		</tbody>
 	</table>
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th><bean:message key="add.group.form.id" /></th>
+				<th><bean:message key="add.group.form.name" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<logic:iterate name="GROUP" id="group">
+				<tr>
+					<td><bean:write name="group" property="groupId" /></td>
+					<td><bean:write name="group" property="groupName" /></td>
+				</tr>
+			</logic:iterate>
+		</tbody>
+	</table>
 </body>
 </html>

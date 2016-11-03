@@ -387,4 +387,57 @@ public class DAOGroup {
 			}
 		}
 	}
+	
+	public List<ContactGroup> searchGroup(String word) {
+
+		System.out.println("Entre dans search group DAO");
+		
+		Connection lConnection = null;
+		
+		final List<ContactGroup> contactGroup = new LinkedList<ContactGroup>();
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			word = word.replace("!", "!!").replace("%", "!%").replace("_", "!_").replace("[", "![");
+
+			final PreparedStatement lPreparedStatementGroup =
+
+					lConnection.prepareStatement(
+							"SELECT GROUPID, GROUPNAME FROM contactgroup WHERE GROUPID LIKE ? OR GROUPNAME LIKE ?");
+
+			lPreparedStatementGroup.setString(1, "%" + word + "%");
+			lPreparedStatementGroup.setString(2, "%" + word + "%");
+			ResultSet rsGroup = lPreparedStatementGroup.executeQuery();
+
+			while (rsGroup.next()) {
+
+				final int id = rsGroup.getInt("GROUPID");
+				final String groupName = rsGroup.getString("GROUPNAME");
+
+				contactGroup.add(new ContactGroup(id, groupName));
+			}
+
+		} catch (NamingException e) {
+
+			System.out.println(e.getMessage());
+			contactGroup.add(new ContactGroup(0, "NamingException : " + e.getMessage()));
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+			contactGroup.add(new ContactGroup(0, "SQLException : " + e.getMessage()));
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				contactGroup.add(new ContactGroup(0, "Erreur : " + e.getMessage()));
+			}
+		}
+		return contactGroup;
+	}
 }

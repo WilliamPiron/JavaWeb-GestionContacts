@@ -207,8 +207,7 @@ public class DAOPhone {
 	public List<PhoneNumber> searchPhone(String word) {
 
 		System.out.println("Entre dans search phone DAO");
-
-		final DisplayAllContact display = new DisplayAllContact();
+		
 		Connection lConnection = null;
 		
 		final List<PhoneNumber> phones = new LinkedList<PhoneNumber>();
@@ -249,7 +248,6 @@ public class DAOPhone {
 		} catch (SQLException e) {
 
 			System.out.println(e.getMessage());
-			display.setError("SQLException : " + e.getMessage());
 			phones.add(new PhoneNumber(0, 0, null, null, "SQLException : " + e.getMessage()));
 
 		} finally {
