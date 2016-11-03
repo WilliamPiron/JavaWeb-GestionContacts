@@ -15,13 +15,23 @@
 <html:html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="display.contact.title" /></title>
 </head>
 <body>
 
+<h1 class="text-center"><bean:message key="title.contact" /></h1>
+	<br>
+	<br>
+
 	<!-- On divise les infos d'un contact en 3 tableaux : contact + adresse, phones et groups -->
 	<!-- Tableau contact -->
-	<table border="1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th><bean:message key="add.contact.form.id" /></th>
@@ -59,8 +69,11 @@
 		</tbody>
 	</table>
 
+	<br>
+	<br>
+
 	<!-- Tableau phone -->
-	<table border="1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th><bean:message key="add.contact.form.phonekind" /></th>
@@ -102,9 +115,12 @@
 		</tbody>
 	</table>
 
+	<br>
+	<br>
+
 	<html:form action="/AddPhone">
 		<html:errors />
-		<table border="1">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><bean:message key="add.phone.form.contact.id" /></th>
@@ -132,8 +148,11 @@
 		</table>
 	</html:form>
 
+	<br>
+	<br>
+
 	<!-- Tableau groups -->
-	<table border="1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th><bean:message key="add.contact.form.groupname" /></th>
@@ -175,8 +194,14 @@
 			</logic:iterate>
 		</tbody>
 	</table>
-	<h4>
-		<a href="Main.do"><bean:message key="main.redirection" /></a>
-	</h4>
+	
+	<br>
+	<br>
+	
+	<div class="text-center">
+		<h4>
+			<a href="Main.do"><bean:message key="main.redirection" /></a>
+		</h4>
+	</div>
 </body>
 </html:html>

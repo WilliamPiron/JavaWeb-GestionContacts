@@ -8,10 +8,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="group.all.update" /></title>
 </head>
 <body>
-<html:form action="/UpdateGroup">
+	<html:form action="/UpdateGroup">
 		<html:errors />
 		<table>
 			<tr>
@@ -21,7 +27,7 @@
 			<tr>
 				<td align="right"><bean:message key="add.group.form.id" /></td>
 				<td align="left"><html:text property="groupId" size="30"
-						maxlength="9" readonly="true"/></td>
+						maxlength="9" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message key="add.group.form.name" /></td>

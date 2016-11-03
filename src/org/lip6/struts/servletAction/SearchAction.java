@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.lip6.struts.actionForm.SearchValidationForm;
+import org.lip6.struts.domain.Address;
 import org.lip6.struts.domain.ContactGroup;
 import org.lip6.struts.domain.DAOContact;
 import org.lip6.struts.domain.DAOGroup;
@@ -34,6 +35,8 @@ public class SearchAction extends Action {
 
 		final DAOContact daoContact = new DAOContact();
 		final DisplayAllContact display = daoContact.searchContact(word);
+		
+		final List<Address> displayAddress = daoContact.searchAddress(word);
 
 		final DAOPhone daoPhone = new DAOPhone();
 		List<PhoneNumber> phones = new LinkedList<PhoneNumber>();
@@ -50,10 +53,21 @@ public class SearchAction extends Action {
 		if (contactGroup.isEmpty()) {
 			contactGroup.add(new ContactGroup(0, null));
 		}
+		
+		if (displayAddress.isEmpty()) {
+			displayAddress.add(new Address(0, null, null, null, null));
+		}
 
 		if (display.getError() == null && phones.get(0).getErrors() == null) {
 
 			pRequest.setAttribute("CONTACT", display.getContacts());
+			
+			if (displayAddress.get(0).getId() == 0) {
+				displayAddress.clear();
+				pRequest.setAttribute("ADDRESS", displayAddress);
+			} else {
+				pRequest.setAttribute("ADDRESS", displayAddress);
+			}
 
 			if (contactGroup.get(0).getGroupId() == 0) {
 				contactGroup.clear();

@@ -7,10 +7,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="display.contact.title" /></title>
 </head>
 <body>
-	<table border="1">
+	<h1 class="text-center">
+		<bean:message key="title.list.group" />
+	</h1>
+
+	<br>
+	<br>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th><bean:message key="add.group.form.id" /></th>
@@ -39,7 +51,7 @@
 
 	<html:form action="/AddGroup">
 		<html:errors />
-		<table border="1">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><bean:message key="add.group.form.id" /></th>
@@ -50,7 +62,6 @@
 			</thead>
 
 			<tbody>
-
 				<tr>
 					<td><html:text property="id" maxlength="9" /></td>
 					<td><html:text property="name" maxlength="50" /></td>

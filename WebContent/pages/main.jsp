@@ -8,6 +8,12 @@
 <html:html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="main.page.title" /></title>
 </head>
 <body>
@@ -15,16 +21,14 @@
 		<bean:message key="main.page.menu" />
 	</h1>
 	<h4>
-		<a href="GroupsDisplay.do"><bean:message
-				key="main.group" /></a>
+		<a href="GroupsDisplay.do"><bean:message key="main.group" /></a>
 	</h4>
 	<h4>
 		<a href="AllContactDisplay.do"><bean:message
 				key="main.contactdisplay.link" /></a>
 	</h4>
 	<h4>
-		<a href="Search.do"><bean:message
-				key="main.search" /></a>
+		<a href="Search.do"><bean:message key="main.search" /></a>
 	</h4>
 </body>
 </html:html>

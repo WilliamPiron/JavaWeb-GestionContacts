@@ -7,10 +7,21 @@
 <html:html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="display.contact.title" /></title>
 </head>
 <body>
-	<table border="1">
+	<h1 class="text-center">
+		<bean:message key="title.list.contact" />
+	</h1>
+	<br>
+	<br>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th><bean:message key="add.contact.form.id" /></th>
@@ -33,8 +44,8 @@
 							paramName="contact" paramProperty="id">
 							<bean:message key="contact.display.link" />
 						</html:link></td>
-					<td><html:link action="ContactDeletion.do?action=delete" paramId="id"
-							paramName="contact" paramProperty="id">
+					<td><html:link action="ContactDeletion.do?action=delete"
+							paramId="id" paramName="contact" paramProperty="id">
 							<bean:message key="main.deletecontact.link" />
 						</html:link></td>
 					<td><html:link action="UpdateC.do" paramId="id"
@@ -47,7 +58,7 @@
 	</table>
 	<html:form action="/AddContact">
 		<html:errors />
-		<table border="1">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><bean:message key="add.contact.form.id" /></th>
@@ -82,8 +93,10 @@
 			</tbody>
 		</table>
 	</html:form>
-	<h4>
-		<a href="Main.do"><bean:message key="main.redirection" /></a>
-	</h4>
+	<div class="text-center">
+		<h4>
+			<a href="Main.do"><bean:message key="main.redirection" /></a>
+		</h4>
+	</div>
 </body>
 </html:html>

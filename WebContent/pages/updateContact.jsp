@@ -8,6 +8,12 @@
 <html:html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="contact.all.update" /></title>
 <html:base />
 </head>
@@ -22,7 +28,7 @@
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.id" /></td>
 				<td align="left"><html:text property="id" size="30"
-						maxlength="9" readonly="true"/></td>
+						maxlength="9" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td align="right"><bean:message key="add.contact.form.lastname" /></td>

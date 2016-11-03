@@ -8,33 +8,34 @@
 <html:html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+
 <title><bean:message key="welcome.page.title" /></title>
 <html:base />
 </head>
 <body>
-	<html:form action="/Login">
-		<html:errors />
-		<table>
-			<tr>
-				<td align="center" colspan="2"><font size="4"><bean:message
-							key="form.login.info" /></font>
-			</tr>
-			<tr>
-				<td align="right"><bean:message key="contact.form.username" /></td>
-				<td align="left"><html:text property="username" size="30"
-						maxlength="50" value="admin" /></td>
-			</tr>
-			<tr>
-				<td align="right"><bean:message key="contact.form.password" /></td>
-				<td align="left"><html:password property="password" size="30"
-						maxlength="50" value="admin"/></td>
-			</tr>
-			<tr>
-				<td align="right"><html:submit>
+	<div class="container">
+		<div class="wrapper">
+			<html:form action="/Login" styleClass="form-signin">
+				<h3 class="form-signin-heading">Please Sign In</h3>
+				<hr class="colorgraph">
+				<br>
+
+				<html:text property="username" size="30" maxlength="50"
+					value="admin" styleClass="form-control" />
+				<html:password property="password" size="30" maxlength="50"
+					value="admin" styleClass="form-control" />
+				<td align="right"><html:submit
+						styleClass="btn btn-lg btn-primary btn-block">
 						<bean:message key="form.validation" />
 					</html:submit></td>
-			</tr>
-		</table>
-	</html:form>
+				<html:errors />
+			</html:form>
+		</div>
+	</div>
 </body>
 </html:html>

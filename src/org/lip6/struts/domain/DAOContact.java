@@ -41,6 +41,17 @@ public class DAOContact {
 				return "La combinaison email/nom existe déjà !";
 			}
 
+			// On regarde si le email existe
+			final PreparedStatement lPreparedStatementEmail =
+
+					lConnection.prepareStatement("SELECT ID FROM contact WHERE EMAIL = ?");
+
+			lPreparedStatementEmail.setString(1, email);
+			ResultSet rsEmail = lPreparedStatementEmail.executeQuery();
+			if (rsEmail.next()) {
+				return "L'email existe déjà !";
+			}
+
 			// Contact
 			final PreparedStatement lPreparedStatementCreation =
 
@@ -321,6 +332,30 @@ public class DAOContact {
 			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
 			lConnection = lDataSource.getConnection();
 
+			// On regarde si la combinaison email/nom existe
+			final PreparedStatement lPreparedStatementContact =
+
+					lConnection.prepareStatement("SELECT ID FROM contact WHERE LASTNAME = ? AND EMAIL = ?");
+
+			lPreparedStatementContact.setString(1, lastName);
+			lPreparedStatementContact.setString(2, email);
+
+			ResultSet rsContact = lPreparedStatementContact.executeQuery();
+			if (rsContact.next()) {
+				return "La combinaison email/nom existe déjà !";
+			}
+
+			// On regarde si le email existe
+			final PreparedStatement lPreparedStatementEmail =
+
+					lConnection.prepareStatement("SELECT ID FROM contact WHERE EMAIL = ?");
+
+			lPreparedStatementEmail.setString(1, email);
+			ResultSet rsEmail = lPreparedStatementEmail.executeQuery();
+			if (rsEmail.next()) {
+				return "L'email existe déjà !";
+			}
+
 			PreparedStatement lPreparedStatementUpdate =
 
 					lConnection.prepareStatement("UPDATE contact SET LASTNAME=?, FIRSTNAME=?, EMAIL=? WHERE id=?");
@@ -449,5 +484,63 @@ public class DAOContact {
 			}
 		}
 		return display;
+	}
+
+	public List<Address> searchAddress(String word) {
+
+		System.out.println("Entre dans search address DAO");
+
+		Connection lConnection = null;
+		final List<Address> address = new LinkedList<Address>();
+
+		try {
+			final Context lContext = new InitialContext();
+			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
+			lConnection = lDataSource.getConnection();
+
+			word = word.replace("!", "!!").replace("%", "!%").replace("_", "!_").replace("[", "![");
+
+			final PreparedStatement lPreparedStatementAddress =
+
+					lConnection.prepareStatement(
+							"SELECT ID, STREET, CITY, ZIP, COUNTRY FROM address WHERE ID LIKE ? OR STREET LIKE ? OR CITY LIKE ? OR ZIP LIKE ? OR COUNTRY LIKE ?");
+
+			lPreparedStatementAddress.setString(1, "%" + word + "%");
+			lPreparedStatementAddress.setString(2, "%" + word + "%");
+			lPreparedStatementAddress.setString(3, "%" + word + "%");
+			lPreparedStatementAddress.setString(4, "%" + word + "%");
+			lPreparedStatementAddress.setString(5, "%" + word + "%");
+			ResultSet rsAddress = lPreparedStatementAddress.executeQuery();
+
+			while (rsAddress.next()) {
+
+				final long id = rsAddress.getLong("ID");
+				final String street = rsAddress.getString("STREET");
+				final String city = rsAddress.getString("CITY");
+				final String zip = rsAddress.getString("ZIP");
+				final String country = rsAddress.getString("COUNTRY");
+
+				address.add(new Address(id, street, city, zip, country));
+			}
+
+		} catch (NamingException e) {
+
+			System.out.println(e.getMessage());
+			address.add(new Address(0, "NamingException : " + e.getMessage(), null, null, null));
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+			address.add(new Address(0, "SQLException : " + e.getMessage(), null, null, null));
+
+		} finally {
+			try {
+				if (lConnection != null)
+					lConnection.close();
+			} catch (SQLException e) {
+				address.add(new Address(0, "Erreur : " + e.getMessage(), null, null, null));
+			}
+		}
+		return address;
 	}
 }

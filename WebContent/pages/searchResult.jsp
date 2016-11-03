@@ -8,9 +8,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="display.contact.title" /></title>
 </head>
 <body>
+
+	<!-- CONTACT -->
 	<table border="1">
 		<thead>
 			<tr>
@@ -31,7 +39,30 @@
 			</logic:iterate>
 		</tbody>
 	</table>
-	
+
+	<!-- ADDRESS -->
+	<table border="1">
+		<thead>
+			<tr>
+				<th><bean:message key="add.contact.form.street" /></th>
+				<th><bean:message key="add.contact.form.city" /></th>
+				<th><bean:message key="add.contact.form.zip" /></th>
+				<th><bean:message key="add.contact.form.country" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<logic:iterate name="ADDRESS" id="address">
+				<tr>
+					<td><bean:write name="address" property="street" /></td>
+					<td><bean:write name="address" property="city" /></td>
+					<td><bean:write name="address" property="zip" /></td>
+					<td><bean:write name="address" property="country" /></td>
+				</tr>
+			</logic:iterate>
+		</tbody>
+	</table>
+
+	<!-- PHONE -->
 	<table border="1">
 		<thead>
 			<tr>
@@ -52,7 +83,8 @@
 			</logic:iterate>
 		</tbody>
 	</table>
-	
+
+	<!-- GROUP -->
 	<table border="1">
 		<thead>
 			<tr>

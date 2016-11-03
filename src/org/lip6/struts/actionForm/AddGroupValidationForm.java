@@ -6,6 +6,10 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.lip6.struts.domain.DAOContact;
+import org.lip6.struts.domain.DAOGroup;
+import org.lip6.struts.domain.DisplayAllContact;
+import org.lip6.struts.domain.DisplayGroups;
 
 public class AddGroupValidationForm extends ActionForm {
 
@@ -59,6 +63,15 @@ public class AddGroupValidationForm extends ActionForm {
 		}
 		if (getName().trim() == null || getName().trim().length() < 1) {
 			errors.add("name", new ActionMessage("creation.group.name.error.required"));
+		}
+		
+		final DAOGroup daoGroup = new DAOGroup();
+		final DisplayGroups displayGroups = daoGroup.displayAllGroups();
+
+		// On ne gère pas les erreurs s'il y a un problème avec la BDD !
+		if (displayGroups.getError() == null) {
+			
+			request.setAttribute("LISTEGROUPS", displayGroups.getGroups());
 		}
 		
 		return errors;

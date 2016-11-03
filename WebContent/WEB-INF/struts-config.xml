@@ -69,7 +69,7 @@
     <action path="/AddGroup"
 				type="org.lip6.struts.servletAction.AddGroupAction"
 				name="AddGroupValidationForm" scope="request" 
-				input="/pages/creationGroup.jsp">
+				input="/pages/displayGroups.jsp">
 				
 			<forward name="success" path="/pages/displayGroups.jsp" />
 			<forward name="error" path="/pages/error.jsp" />

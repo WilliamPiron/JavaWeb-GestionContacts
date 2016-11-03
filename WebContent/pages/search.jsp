@@ -8,11 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="css\bootstrap-3.3.7-dist\css\bootstrap.custom.login.css" />
+
 <title><bean:message key="main.search" /></title>
 </head>
 <body>
-<h2><bean:message key="main.search.info" /></h2>
-<html:form action="/SearchAll">
+	<h2>
+		<bean:message key="main.search.info" />
+	</h2>
+	<html:form action="/SearchAll">
 		<html:errors />
 		<table border="1">
 			<thead>
@@ -25,7 +33,7 @@
 
 			<tbody>
 				<tr>
-					<td><html:text property="word" maxlength="9" /></td>
+					<td><html:text property="word" maxlength="50" /></td>
 					<td><html:submit>
 							<bean:message key="form.validation" />
 						</html:submit></td>
