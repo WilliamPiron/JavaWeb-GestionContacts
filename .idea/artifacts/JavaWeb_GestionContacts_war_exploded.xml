@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="JavaWeb-GestionContacts:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaWeb_GestionContacts_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="JavaWeb-GestionContacts/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="JavaWeb-GestionContacts" />
+          <element id="library" level="project" name="struts-struts" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -121,7 +121,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param string
+	 * @param address
 	 *            Sets the Address
 	 */
 	public void setAddress(List<Address> address) {
@@ -129,7 +129,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param string
+	 * @param phone
 	 *            Sets the Phones
 	 */
 	public void setPhone(LinkedList<PhoneNumber> phone) {
@@ -137,7 +137,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param string
+	 * @param group
 	 *            Sets the Phones
 	 */
 	public void setGroup(LinkedList<ContactGroup> group) {
